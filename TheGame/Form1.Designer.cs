@@ -1,6 +1,6 @@
 ﻿namespace TheGame
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
