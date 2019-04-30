@@ -21,8 +21,12 @@ namespace TheGame
         
         public void Move()
         {
-            throw new System.NotImplementedException();
+            UpdateDirection();
+            var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
+            Location = Location + deltaLocation;
         }
+
+        private void UpdateDirection(){}
 
         public void Kill() => IsAlive = false;
         
