@@ -3,9 +3,6 @@ using System.Drawing;
 
 namespace TheGame
 {
-    //Просто вектор. Взят из практик в элементах функционального программирования.
-    //Посмотри как оно используется там
-    //НЕ ЗАБЫТЬ СТЕРЕТЬ!!!
     public class Vector
     {
         public Vector(double x, double y)
