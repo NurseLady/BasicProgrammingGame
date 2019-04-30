@@ -8,6 +8,7 @@ namespace TheGame
         public double Direction { get; private set; }
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public int Life { get; }
         public bool IsAlive { get; private set; }
 
         public Bullet(Vector location, double direction, int speed = 40)

@@ -6,6 +6,7 @@ namespace TheGame
         double Direction { get; } 
         int Size { get;  }
         int Speed { get; }
+        int Life { get; }
         bool IsAlive { get; }
         
         void Move();

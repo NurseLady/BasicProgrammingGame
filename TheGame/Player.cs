@@ -7,9 +7,13 @@ namespace TheGame
         public double TurnAngle { get; private set; } = 1;
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public int Life { get; }
         public bool IsFire { get; private set; }
         public bool IsMove { get; private set; }
         public bool IsAlive { get; private set; }
+        
+        public int FireSpeed { get; private set; }
+        public int BulletsCount { get; private set; }
 
         public Player(Vector location, double direction, int speed = 10)
         {

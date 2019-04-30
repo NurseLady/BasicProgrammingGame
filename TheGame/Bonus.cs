@@ -8,6 +8,7 @@ namespace TheGame
         public double Direction { get; private set; }
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public int Life { get; }
         public bool IsAlive { get; private set; }
 
         public Bonus(Vector location, double direction, int size)
@@ -19,10 +20,7 @@ namespace TheGame
             IsAlive = true;
         }
         
-        public void Move()
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Move(){}
 
         public void Kill() => IsAlive = false;
         

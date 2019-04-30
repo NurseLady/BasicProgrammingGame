@@ -6,17 +6,20 @@ namespace TheGame
         public double Direction { get; private set; }
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public int Life { get; private set; }
         public bool IsAlive { get; private set; }
         public bool IsMet { get; set; }
+        public int Costs { get; private set; }
 
-        public SimpleEnemy(Vector location, double direction, int size, int speed)
+        public SimpleEnemy(Vector location, double direction, int size, int speed, int life, int costs)
         {
             Location = location;
             Direction = direction;
             Size = size;
             Speed = speed;
+            Life = life;
+            Costs = costs;
             IsAlive = true;
-            
         }
         
         public void Move()
