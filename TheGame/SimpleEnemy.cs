@@ -21,6 +21,7 @@ namespace TheGame
         
         public void Move()
         {
+            Direction += 0.3;
             var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
             Location = Location + deltaLocation;
         }
