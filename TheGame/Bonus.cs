@@ -7,6 +7,7 @@ namespace TheGame
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
         public int Size { get; private set; }
+        public int Speed { get; private set; }
         public bool IsAlive { get; private set; }
 
         public Bonus(Vector location, double direction, int size)
@@ -14,6 +15,7 @@ namespace TheGame
             Location = location;
             Direction = direction;
             Size = size;
+            Speed = 0;
             IsAlive = true;
         }
         

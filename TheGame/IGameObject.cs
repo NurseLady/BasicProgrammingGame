@@ -5,6 +5,7 @@ namespace TheGame
         Vector Location { get; } 
         double Direction { get; } 
         int Size { get;  }
+        int Speed { get; }
         bool IsAlive { get; }
         
         void Move();

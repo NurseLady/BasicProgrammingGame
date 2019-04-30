@@ -7,13 +7,15 @@ namespace TheGame
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
         public int Size { get; private set; }
+        public int Speed { get; private set; }
         public bool IsAlive { get; private set; }
 
-        public Bullet(Vector location, double direction)
+        public Bullet(Vector location, double direction, int speed = 40)
         {
             Location = location;
             Direction = direction;
             Size = Int32.MaxValue;
+            Speed = speed;
             IsAlive = true;
         }
         

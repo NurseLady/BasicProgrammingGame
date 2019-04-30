@@ -5,14 +5,16 @@ namespace TheGame
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
         public int Size { get; private set; }
+        public int Speed { get; private set; }
         public bool IsAlive { get; private set; }
         public bool IsMet { get; set; }
 
-        public SmartEnemy(Vector location, double direction, int size)
+        public SmartEnemy(Vector location, double direction, int size, int speed)
         {
             Location = location;
             Direction = direction;
             Size = size;
+            Speed = speed;
             IsAlive = true;
             
         }
