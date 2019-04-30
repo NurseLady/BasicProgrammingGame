@@ -4,8 +4,11 @@ namespace TheGame
     {
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
+        public double TurnAngle { get; private set; } = 1;
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public bool IsFire { get; private set; }
+        public bool IsMove { get; private set; }
         public bool IsAlive { get; private set; }
 
         public Player(Vector location, double direction, int speed = 10)
@@ -19,7 +22,16 @@ namespace TheGame
 
         public void Move()
         {
-            throw new System.NotImplementedException();
+            if (IsMove)
+            {
+                var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
+                Location = Location + deltaLocation;
+            }
+        }
+
+        public void UpdateDirection(Turn turn)
+        {
+                Direction += (int) turn * TurnAngle;
         }
 
         public void Kill() => IsAlive = false;
