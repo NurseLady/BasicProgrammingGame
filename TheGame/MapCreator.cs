@@ -10,19 +10,42 @@ namespace TheGame
         
         private static Random random = new Random();
 
-        private static int maxSimpleEnemyCount;
-        private static int maxSmartEnemyCount;
-        private static int maxBonusCount;
+        private static int maxSimpleEnemyCount = 3;
+        private static int maxSmartEnemyCount = 2;
+        private static int maxBonusCount = 5;
+        private static int maxLifeCount = 15;
+        private static int maxSpeedCount = 10;
+        private static int maxSizeCount = 10;
+        private static List<IGameObject> GameObjects = new List<IGameObject>();
         
-
+        
         public static Player GetPlayer()
         {
-            return new Player(new Vector(0, 0), 90);
+            return new Player(new Vector(GameWidth / 2, GameHeight / 2), Math.PI / 2);
         }
 
         public static List<IGameObject> CreateRandomMap()
         {
-            return new List<IGameObject>();
+            AddSimpleEnemies();
+            AddSmartEnemies();
+            AddBonuses();
+
+            return GameObjects;
+        }
+
+        private static void AddBonuses()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void AddSmartEnemies()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void AddSimpleEnemies()
+        {
+            throw new NotImplementedException();
         }
     }
 }
