@@ -4,7 +4,7 @@ namespace TheGame
     {
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
-        public double TurnAngle { get; private set; } = 0.03;
+        public double TurnAngle { get; private set; } = 0.07;
         public int Size { get; private set; }
         public int Speed { get; private set; }
         public int Life { get; }
@@ -16,7 +16,7 @@ namespace TheGame
         public int FireSpeed { get; private set; }
         public int BulletsCount { get; private set; }
 
-        public Player(Vector location, double direction, int speed = 10)
+        public Player(Vector location, double direction, int speed = 15)
         {
             Location = location;
             Direction = direction;
@@ -27,9 +27,9 @@ namespace TheGame
 
         public void Move()
         {
+            UpdateDirection();
             if (IsMove)
             {
-                UpdateDirection();
                 var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
                 Location = Location + deltaLocation;
             }
