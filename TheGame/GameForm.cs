@@ -73,11 +73,29 @@ namespace TheGame
                     game.Player.IsMove = true;
                 
                 if (turnLeftKeys.Contains(ev.KeyCode))
-                    game.Player.UpdateDirection(Turn.Left);
+                    game.Player.Turn = Turn.Left;
                 
                 if (turnRightKeys.Contains(ev.KeyCode))
-                    game.Player.UpdateDirection(Turn.Right);
-
+                    game.Player.Turn = Turn.Right;
+            };
+            
+            KeyUp += (sender, ev) =>
+            {
+                var moveKeys = new Keys[3]
+                {
+                    Keys.Up, Keys.W, Keys.Space
+                };
+                
+                var turnKeys = new Keys[4]
+                {
+                    Keys.Left, Keys.A, Keys.Right, Keys.D
+                };
+                
+                if (moveKeys.Contains(ev.KeyCode))
+                    game.Player.IsMove = false;
+                
+                if (turnKeys.Contains(ev.KeyCode))
+                    game.Player.Turn = Turn.None;
             };
 
             MaximizeBox = false;

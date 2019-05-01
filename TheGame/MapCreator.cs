@@ -21,7 +21,7 @@ namespace TheGame
         
         public static Player GetPlayer()
         {
-            return new Player(new Vector(GameWidth / 2, GameHeight / 2), Math.PI / 2);
+            return new Player(new Vector(GameWidth / 2, GameHeight / 2), -Math.PI / 2);
         }
 
         public static List<IGameObject> CreateRandomMap()

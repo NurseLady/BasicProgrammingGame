@@ -4,12 +4,13 @@ namespace TheGame
     {
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
-        public double TurnAngle { get; private set; } = 1;
+        public double TurnAngle { get; private set; } = 0.1;
         public int Size { get; private set; }
         public int Speed { get; private set; }
         public int Life { get; }
         public bool IsFire { get; private set; }
         public bool IsMove { get; set; } = false;
+        public Turn Turn { get; set; } = Turn.None;
         public bool IsAlive { get; private set; }
         
         public int FireSpeed { get; private set; }
@@ -28,14 +29,15 @@ namespace TheGame
         {
             if (IsMove)
             {
+                UpdateDirection();
                 var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
                 Location = Location + deltaLocation;
             }
         }
 
-        public void UpdateDirection(Turn turn)
+        public void UpdateDirection()
         {
-                Direction += (int) turn * TurnAngle;
+                Direction += (int) Turn * TurnAngle;
         }
 
         public void Kill() => IsAlive = false;
