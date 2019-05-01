@@ -24,6 +24,7 @@ namespace TheGame
                     break;
                 case Bonus _:
                     e.FillEllipse(Brushes.Plum, rect);
+                    return;
                     break;
                 case Bullet _:
                     e.FillEllipse(Brushes.Tan, rect);
@@ -32,6 +33,9 @@ namespace TheGame
                     e.FillEllipse(Brushes.Maroon, rect);
                     break;
             }
+            var v = new Vector(1, 0).Rotate(gameObject.Direction) * d / 2;
+            v += gameObject.Location;
+            e.FillEllipse(Brushes.Chartreuse, (float) v.X - 2, (float)v.Y - 2, 4, 4);
         }
     }
 }
