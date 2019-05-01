@@ -4,7 +4,7 @@ namespace TheGame
 {
     public class Game
     {
-        public IGameObject Player { get; private set; }
+        public Player Player { get; private set; }
         public int Score { get; private set; }
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
@@ -12,7 +12,7 @@ namespace TheGame
         private int Height;
         private int Width;
         
-        public Game(int catLeftTopCornerX, int catLeftTopCornerY)
+        public Game()
         {
             Player = MapCreator.GetPlayer();
             Width = MapCreator.GameWidth;
@@ -21,14 +21,24 @@ namespace TheGame
             Score = 0;
             IsOver = false;
         }
-        
-        public void Update(){}
+
+        public void Update()
+        {
+          //  MoveAllObjects();
+            Player.Move();
+        }
 
         public IGameObject FindIntersectedObject()
         {
             throw new System.NotImplementedException();
         }
-        
-        private void MoveAllObjects(List<IGameObject> gameObjects){}
+
+        private void MoveAllObjects()
+        {
+            foreach (var gameObject in GameObjects)
+            {
+                gameObject.Move();
+            }
+        }
     }
 }

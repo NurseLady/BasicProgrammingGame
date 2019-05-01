@@ -35,17 +35,17 @@ namespace TheGame
 
         private static void AddBonuses()
         {
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
 
         private static void AddSmartEnemies()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         private static void AddSimpleEnemies()
         {
-            throw new NotImplementedException();
+           // throw new NotImplementedException();
         }
     }
 }

@@ -9,7 +9,7 @@ namespace TheGame
         public int Speed { get; private set; }
         public int Life { get; }
         public bool IsFire { get; private set; }
-        public bool IsMove { get; private set; }
+        public bool IsMove { get; set; } = false;
         public bool IsAlive { get; private set; }
         
         public int FireSpeed { get; private set; }
