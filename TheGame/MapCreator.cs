@@ -5,8 +5,8 @@ namespace TheGame
 {
     public class MapCreator
     {
-        public const int GameWidth = 1080;
-        public const int GameHeight = 720;
+        public const int GameWidth = 1000;
+        public const int GameHeight = 640;
         
         private static Random random = new Random();
 
@@ -35,17 +35,17 @@ namespace TheGame
 
         private static void AddBonuses()
         {
-            // throw new NotImplementedException();
+            GameObjects.Add(new Bonus(new Vector(30, 200), Math.PI/3, 2));
         }
 
         private static void AddSmartEnemies()
         {
-            //throw new NotImplementedException();
+            GameObjects.Add(new SmartEnemy(new Vector(200, 300), 3, 2,5,3,3 ));
         }
 
         private static void AddSimpleEnemies()
         {
-           // throw new NotImplementedException();
+           GameObjects.Add(new SimpleEnemy(new Vector(600, 400), 3, 3,5,3,3 ));
         }
     }
 }

@@ -16,6 +16,7 @@ namespace TheGame
         {
             var game = new Game();
             DoubleBuffered = true;
+            BackColor = Color.Black;
             var time = 0;
             var timer = new Timer
             {
@@ -34,7 +35,6 @@ namespace TheGame
                 ControlElements.score.Text = game.Score.ToString();
                 if (game.IsOver)
                 {
-                    BackColor = Color.Black;
                     ControlElements.gameOver.Text = "GAME OVER";
                     ControlElements.scoreLabel.Location = new Point(380,
                         ControlElements.gameOver.Bottom + 20);
@@ -101,6 +101,12 @@ namespace TheGame
             MaximizeBox = false;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             InitializeComponent();
+        }
+
+        public sealed override Color BackColor
+        {
+            get { return base.BackColor; }
+            set { base.BackColor = value; }
         }
     }
 }

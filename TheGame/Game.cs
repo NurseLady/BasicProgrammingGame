@@ -24,7 +24,7 @@ namespace TheGame
 
         public void Update()
         {
-          //  MoveAllObjects();
+            MoveAllObjects();
             Player.Move();
         }
 

@@ -4,7 +4,7 @@ namespace TheGame
     {
         public Vector Location { get; private set; }
         public double Direction { get; private set; }
-        public double TurnAngle { get; private set; } = 0.1;
+        public double TurnAngle { get; private set; } = 0.03;
         public int Size { get; private set; }
         public int Speed { get; private set; }
         public int Life { get; }
@@ -20,7 +20,7 @@ namespace TheGame
         {
             Location = location;
             Direction = direction;
-            Size = 1;
+            Size = 2;
             Speed = speed;
             IsAlive = true;
         }
