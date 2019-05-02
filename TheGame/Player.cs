@@ -2,7 +2,7 @@ namespace TheGame
 {
     public class Player : IGameObject
     {
-        public Vector Location { get; private set; }
+        public Vector Location { get; set; }
         public double Direction { get; private set; }
         public double TurnAngle { get; private set; } = 0.07;
         public int Size { get; private set; }

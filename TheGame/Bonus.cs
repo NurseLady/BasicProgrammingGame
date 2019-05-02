@@ -4,7 +4,7 @@ namespace TheGame
 {
     public class Bonus : IGameObject
     {
-        public Vector Location { get; private set; }
+        public Vector Location { get; set; }
         public double Direction { get; private set; }
         public int Size { get; private set; }
         
@@ -24,7 +24,7 @@ namespace TheGame
             IsAlive = true;
         }
         
-        public void Move(){}
+        public void UpdateDirection(){}
 
         public void Kill() => IsAlive = false;
         

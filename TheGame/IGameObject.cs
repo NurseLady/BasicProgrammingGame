@@ -2,7 +2,7 @@ namespace TheGame
 {
     public interface IGameObject
     {
-        Vector Location { get; } 
+        Vector Location { get; set; } 
         double Direction { get; } 
         int Size { get;  }
         int Speed { get; }
@@ -10,7 +10,7 @@ namespace TheGame
         int Life { get; }
         bool IsAlive { get; }
         
-        void Move();
+        void UpdateDirection();
         void Kill();
         void Use(Game game);
     }

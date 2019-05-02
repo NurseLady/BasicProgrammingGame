@@ -2,7 +2,7 @@ namespace TheGame
 {
     public class SimpleEnemy : IEnemy
     {
-        public Vector Location { get; private set; }
+        public Vector Location { get; set; }
         public double Direction { get; private set; }
         public int Size { get; private set; }
         public int Speed { get; private set; }
@@ -24,11 +24,9 @@ namespace TheGame
             IsAlive = true;
         }
         
-        public void Move()
+        public void UpdateDirection()
         {
             Direction += 0.01;
-            var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed * SpeedFactor;
-            Location = Location + deltaLocation;
         }
 
         public void Kill() => IsAlive = false;

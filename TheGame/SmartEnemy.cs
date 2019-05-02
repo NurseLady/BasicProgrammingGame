@@ -2,7 +2,7 @@ namespace TheGame
 {
     public class SmartEnemy : IEnemy
     {
-        public Vector Location { get; private set; }
+        public Vector Location { get; set; }
         public double Direction { get; private set; }
         public int Size { get; private set; }
         public int Speed { get; private set; }
@@ -28,15 +28,8 @@ namespace TheGame
             Costs = costs;
             IsAlive = true;
         }
-        
-        public void Move()
-        {
-            UpdateDirection();
-            var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed * SpeedFactor;
-            Location = Location + deltaLocation;
-        }
 
-        private void UpdateDirection(){}
+        public void UpdateDirection(){}
 
         public void Kill() => IsAlive = false;
         

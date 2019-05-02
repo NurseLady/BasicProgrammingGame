@@ -37,8 +37,16 @@ namespace TheGame
         {
             foreach (var gameObject in GameObjects)
             {
-                gameObject.Move();
+                Move(gameObject);
             }
+        }
+
+        private void Move(IGameObject gameObject)
+        {
+            gameObject.UpdateDirection();
+            var deltaLocation = new Vector(1, 0).Rotate(gameObject.Direction) 
+                                * gameObject.Speed * gameObject.SpeedFactor;
+            gameObject.Location += deltaLocation;
         }
     }
 }
