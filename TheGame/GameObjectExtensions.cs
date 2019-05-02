@@ -6,14 +6,13 @@ namespace TheGame
     public static class GameObjectExtensions
     {
          public static void Draw(this IGameObject gameObject, Game game, Graphics e)
-        {
-            var rnd = new Random();
-
-            var d = gameObject.Size * 10;
-            Vector LeftTopCorner = new Vector(gameObject.Location.X - d / 2, 
-                                              gameObject.Location.Y - d / 2);
+         {
+            
+            var r = gameObject.Size * 5;
+            Vector LeftTopCorner = new Vector(gameObject.Location.X - r, 
+                                              gameObject.Location.Y - r);
             var rect = new Rectangle((int)LeftTopCorner.X,
-                (int)LeftTopCorner.Y, d, d);
+                (int)LeftTopCorner.Y, r, r);
             switch (gameObject)
             {
                 case SimpleEnemy _:
@@ -25,16 +24,14 @@ namespace TheGame
                 case Bonus _:
                     e.FillEllipse(Brushes.Plum, rect);
                     return;
-                case Bullet _:
-                    e.FillEllipse(Brushes.Tan, rect);
-                    break;
                 case Player _:
                     e.FillEllipse(Brushes.Maroon, rect);
                     break;
             }
-            var v = new Vector(1, 0).Rotate(gameObject.Direction) * d / 2;
+            var v = new Vector(1, 0).Rotate(gameObject.Direction) * r;
             v += gameObject.Location;
-            e.FillEllipse(Brushes.Chartreuse,  (float)v.X - gameObject.Size, (float)v.Y - gameObject.Size, gameObject.Size * 2, gameObject.Size * 2);
+            e.FillEllipse(Brushes.Chartreuse,  (float)v.X - gameObject.Size, (float)v.Y - gameObject.Size, 
+                gameObject.Size * 2, gameObject.Size * 2);
         }
     }
 }
