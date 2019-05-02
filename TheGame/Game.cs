@@ -7,7 +7,7 @@ namespace TheGame
     public class Game
     {
         public Player Player { get; private set; }
-        public int Score { get; private set; }
+        public int Score { get; set; }
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
 

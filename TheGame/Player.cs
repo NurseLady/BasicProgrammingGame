@@ -8,7 +8,7 @@ namespace TheGame
         public int Size { get; private set; }
         public int Speed { get; private set; }
         public double SpeedFactor { get; }
-        public int Health { get; } = 10;
+        public int Health { get; set; } = 10;
         public bool IsFire { get; set; }
         public bool IsMove { get; set; } = false;
         public Turn Turn { get; set; } = Turn.None;
@@ -31,6 +31,11 @@ namespace TheGame
 
         public void Move(Game game)
         {
+            if (Health == 0)
+            {
+                Kill();
+                return;
+            }
             UpdateDirection();
             if (IsMove && ActualSpeed < Speed)
                 ActualSpeed += 0.5;

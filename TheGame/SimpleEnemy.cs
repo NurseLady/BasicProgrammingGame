@@ -30,7 +30,16 @@ namespace TheGame
         }
 
         public void Kill() => IsAlive = false;
-        
-        public void Use(Game game){}
+
+        public void Use(Game game)
+        {
+            if (Size > game.Player.Size)
+                game.Player.Health = 0;
+            else
+            {
+                game.Score += Costs;
+                Kill();
+            }
+        }
     }
 }
