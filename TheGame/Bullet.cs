@@ -12,11 +12,11 @@ namespace TheGame
         public int Life { get; }
         public bool IsAlive { get; private set; }
 
-        public Bullet(Vector location, double direction, int speed = 40, double speedFactor = 0.1)
+        public Bullet(Vector location, double direction, int size, int speed = 40, double speedFactor = 0.1)
         {
             Location = location;
             Direction = direction;
-            Size = Int32.MaxValue;
+            Size = size;
             Speed = speed;
             SpeedFactor = speedFactor;
             IsAlive = true;

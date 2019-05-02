@@ -16,7 +16,7 @@ namespace TheGame
         private static int maxLifeCount = 15;
         private static int maxSpeedCount = 10;
         private static int maxSizeCount = 10;
-        private static double speedFactor = 0.3 ;
+        private static double speedFactor = 0.1 ;
         private static List<IGameObject> GameObjects = new List<IGameObject>();
         
         

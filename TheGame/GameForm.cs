@@ -54,9 +54,9 @@ namespace TheGame
 
             KeyDown += (sender, ev) =>
             {
-                var moveKeys = new Keys[3]
+                var moveKeys = new Keys[2]
                 {
-                    Keys.Up, Keys.W, Keys.Space
+                    Keys.Up, Keys.W
                 };
                 
                 var turnLeftKeys = new Keys[2]
@@ -68,7 +68,7 @@ namespace TheGame
                 {
                     Keys.Right, Keys.D
                 };
-                
+                var fireKey = Keys.Space;
                 if (moveKeys.Contains(ev.KeyCode))
                     game.Player.IsMove = true;
                 
@@ -77,25 +77,29 @@ namespace TheGame
                 
                 if (turnRightKeys.Contains(ev.KeyCode))
                     game.Player.Turn = Turn.Right;
+                if (ev.KeyCode == fireKey)
+                    game.Player.IsFire = true;
             };
             
             KeyUp += (sender, ev) =>
             {
-                var moveKeys = new Keys[3]
+                var moveKeys = new Keys[2]
                 {
-                    Keys.Up, Keys.W, Keys.Space
+                    Keys.Up, Keys.W
                 };
                 
                 var turnKeys = new Keys[4]
                 {
                     Keys.Left, Keys.A, Keys.Right, Keys.D
                 };
-                
+                var fireKey = Keys.Space;             
                 if (moveKeys.Contains(ev.KeyCode))
                     game.Player.IsMove = false;
                 
                 if (turnKeys.Contains(ev.KeyCode))
                     game.Player.Turn = Turn.None;
+                if (ev.KeyCode == fireKey)
+                    game.Player.IsFire = false;
             };
 
             MaximizeBox = false;

@@ -9,8 +9,8 @@ namespace TheGame
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
 
-        private int Height;
-        private int Width;
+        public int Height;
+        public int Width;
         
         public Game()
         {
@@ -25,7 +25,7 @@ namespace TheGame
         public void Update()
         {
             MoveAllObjects();
-            Player.Move();
+            Player.Move(this);
         }
 
         public IGameObject FindIntersectedObject()
