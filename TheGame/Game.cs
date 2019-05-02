@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TheGame
 {
@@ -9,8 +11,8 @@ namespace TheGame
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
 
-        public int Height;
-        public int Width;
+        readonly int Height;
+        readonly int Width;
         
         public Game()
         {
@@ -26,19 +28,37 @@ namespace TheGame
         {
             MoveAllObjects();
             Player.Move(this);
+            if (!Player.IsAlive)
+            {
+                IsOver = true;
+                return;
+            }
+            HandlePlayerIntersection();
+            UpdateListOfObjects();
         }
 
-        public IGameObject FindIntersectedObject()
+        private void UpdateListOfObjects()
         {
-            throw new System.NotImplementedException();
+            GameObjects = GameObjects.Where(gameObj => gameObj.IsAlive).ToList();
         }
 
+        private void HandlePlayerIntersection() => FindIntersectedObject(Player)?.Use(this);
+        
+        private IGameObject FindIntersectedObject(IGameObject gameObject)
+        {
+            var nearest = GameObjects.OrderBy(o => GetActualDistance(o, gameObject)).First();
+            return Math.Abs(GetActualDistance(nearest, gameObject)) < 1 ? nearest : null;
+        }
+
+        public double GetActualDistance(IGameObject a, IGameObject b)
+        {
+            return a.Location.GetDistance(b.Location) - a.GetObjectRadius() - b.GetObjectRadius();
+        }
+        
         private void MoveAllObjects()
         {
             foreach (var gameObject in GameObjects)
-            {
                 Move(gameObject);
-            }
         }
 
         private void Move(IGameObject gameObject)
