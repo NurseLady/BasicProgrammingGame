@@ -33,6 +33,7 @@ namespace TheGame
             Paint += (sender, args) =>
             {
                 ControlElements.score.Text = game.Score.ToString();
+                ControlElements.bullets.Text = game.Player.BulletsCount.ToString();
                 if (game.IsOver)
                 {
                     ControlElements.gameOver.Text = "GAME OVER";

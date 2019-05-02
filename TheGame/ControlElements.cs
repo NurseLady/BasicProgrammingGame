@@ -8,30 +8,45 @@ namespace TheGame
     {
         public static Control scoreLabel = new Label
         {
-            Text = "SCORE: ",
-            Font = new Font("Arial", 15),
+            Text = "Score: ",
+            Font = new Font("Arial", 10),
             Size = new Size(105, 25),
-            Location = new Point(0, 600),
+            Location = new Point(20, 620),
             ForeColor = Color.Silver
         };
         public static Control score = new Label
         {
-            Font = new Font("Arial", 15),
+            Font = new Font("Arial", 10),
             AutoSize = true,
-            Location = new Point(scoreLabel.Right, 600),
+            Location = new Point(scoreLabel.Right, 620),
+            ForeColor = Color.Silver
+        };
+        public static Control bulletsLabel = new Label
+        {
+            Text = "Bullets: ",
+            Font = new Font("Arial", 10),
+            Size = new Size(105, 25),
+            Location = new Point(20, 20),
+            ForeColor = Color.Silver
+        };
+        public static Control bullets = new Label
+        {
+            Font = new Font("Arial", 10),
+            AutoSize = true,
+            Location = new Point(scoreLabel.Right, 20),
             ForeColor = Color.Silver
         };
 
         public static Control gameOver = new Label
         {
-            Font = new Font("Times New Roman", 42),
+            Font = new Font("Arial", 42),
             AutoSize = true,
             Location = new Point(300, 350),
-            ForeColor = Color.Red
+            ForeColor = Color.Silver
         };
         public static List<Control> Controls = new List<Control>
         {
-            scoreLabel, score, gameOver
+            scoreLabel, score, bulletsLabel, bullets, gameOver
         };
     }
 }
