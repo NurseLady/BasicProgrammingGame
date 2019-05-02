@@ -7,6 +7,7 @@ namespace TheGame
         public double TurnAngle { get; private set; } = 0.07;
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public double SpeedFactor { get; }
         public int Life { get; }
         public bool IsFire { get; private set; }
         public bool IsMove { get; set; } = false;
@@ -17,12 +18,13 @@ namespace TheGame
         public int BulletsCount { get; private set; }
         private double ActualSpeed = 0;
 
-        public Player(Vector location, double direction, int speed = 30)
+        public Player(Vector location, double direction, int speed = 15, double speedFactor = 0.1)
         {
             Location = location;
             Direction = direction;
             Size = 2;
             Speed = speed;
+            SpeedFactor = speedFactor;
             IsAlive = true;
         }
 
@@ -33,7 +35,7 @@ namespace TheGame
                 ActualSpeed += 0.5;
             else if (ActualSpeed > 0)
                 ActualSpeed -= 0.5;
-            var deltaLocation = new Vector(1, 0).Rotate(Direction) * ActualSpeed / 10;
+            var deltaLocation = new Vector(1, 0).Rotate(Direction) * ActualSpeed * SpeedFactor;
             Location = Location + deltaLocation;
         }
 

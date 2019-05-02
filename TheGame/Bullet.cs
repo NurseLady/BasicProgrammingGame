@@ -8,21 +8,23 @@ namespace TheGame
         public double Direction { get; private set; }
         public int Size { get; private set; }
         public int Speed { get; private set; }
+        public double SpeedFactor { get; }
         public int Life { get; }
         public bool IsAlive { get; private set; }
 
-        public Bullet(Vector location, double direction, int speed = 40)
+        public Bullet(Vector location, double direction, int speed = 40, double speedFactor = 0.1)
         {
             Location = location;
             Direction = direction;
             Size = Int32.MaxValue;
             Speed = speed;
+            SpeedFactor = speedFactor;
             IsAlive = true;
         }
         
         public void Move()
         {
-            var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
+            var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed * SpeedFactor;
             Location = Location + deltaLocation;
         }
 
