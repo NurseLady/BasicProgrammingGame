@@ -7,7 +7,7 @@ namespace TheGame
         public int Size { get; private set; }
         public int Speed { get; private set; }
         public double SpeedFactor { get; }
-        public int Health { get; }
+        public int Health { get; set; }
         public bool IsAlive { get; private set; }
         public bool IsMet { get; set; }
         public int Costs { get; }
@@ -32,7 +32,16 @@ namespace TheGame
         public void UpdateDirection(){}
 
         public void Kill() => IsAlive = false;
-        
-        public void Use(Game game){}
+
+        public void Use(Game game)
+        {
+            if (Size > game.Player.Size)
+                game.Player.Health = 0;
+            else
+            {
+                game.Score += Costs;
+                Kill();
+            }
+        }
     }
 }

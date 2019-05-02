@@ -41,7 +41,7 @@ namespace TheGame
 
         private static void AddSmartEnemies()
         {
-            GameObjects.Add(new SmartEnemy(new Vector(200, 300), 3, 2,5,3,3, speedFactor));
+            GameObjects.Add(new SmartEnemy(new Vector(200, 300), Math.PI/4, 2,2,3,3, speedFactor));
         }
 
         private static void AddSimpleEnemies()

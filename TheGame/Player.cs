@@ -42,8 +42,11 @@ namespace TheGame
             else if (ActualSpeed > 0)
                 ActualSpeed -= 0.5;
             var deltaLocation = new Vector(1, 0).Rotate(Direction) * ActualSpeed * SpeedFactor;
-            Location = Location + deltaLocation;
-            
+            var newLocation = Location + deltaLocation;
+            if (newLocation.X > 0 && newLocation.Y > 0
+                                  && newLocation.X < game.Width && newLocation.Y < game.Height)
+                Location = newLocation;
+
             if (FirePause != 0)
                 FirePause--;
             else

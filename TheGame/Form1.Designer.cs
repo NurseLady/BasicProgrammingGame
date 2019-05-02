@@ -34,9 +34,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(982, 653);
+            this.ClientSize = new System.Drawing.Size(1002, 643);
             this.Name = "GameForm";
-            this.Text = "Form1";
+            this.Text = "TheGame";
             this.ResumeLayout(false);
 
         }
