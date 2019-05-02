@@ -70,7 +70,7 @@ namespace TheGame
             return Length > 0 ? this * (1 / Length) : this;
         }
         
-        private double GetDistance(Vector a)
+        public double GetDistance(Vector a)
         {
             return Math.Sqrt((a.X - this.X) * (a.X - this.X) + (a.Y - this.Y) * (a.Y - this.Y));
         }
