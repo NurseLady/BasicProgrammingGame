@@ -10,7 +10,7 @@ namespace TheGame
         {
             Text = "Score: ",
             Font = new Font("Arial", 10),
-            Size = new Size(105, 25),
+            Size = new Size(65, 25),
             Location = new Point(20, 620),
             ForeColor = Color.Silver
         };
@@ -25,18 +25,33 @@ namespace TheGame
         {
             Text = "Bullets: ",
             Font = new Font("Arial", 10),
-            Size = new Size(105, 25),
+            Size = new Size(65, 25),
             Location = new Point(20, 20),
-            ForeColor = Color.Silver
+            ForeColor = Color.Blue
         };
         public static Control bullets = new Label
         {
             Font = new Font("Arial", 10),
             AutoSize = true,
-            Location = new Point(scoreLabel.Right, 20),
+            Location = new Point(bulletsLabel.Right, 20),
             ForeColor = Color.Silver
         };
 
+        public static Control healthLabel = new Label
+        {
+            Text = "Health: ",
+            Font = new Font("Arial", 10),
+            Size = new Size(65, 25),
+            Location = new Point(20, bulletsLabel.Bottom),
+            ForeColor = Color.Crimson
+        };
+        public static Control health = new Label
+        {
+            Font = new Font("Arial", 10),
+            AutoSize = true,
+            Location = new Point(healthLabel.Right, bulletsLabel.Bottom),
+            ForeColor = Color.Silver
+        };
         public static Control gameOver = new Label
         {
             Font = new Font("Arial", 42),
@@ -46,7 +61,7 @@ namespace TheGame
         };
         public static List<Control> Controls = new List<Control>
         {
-            scoreLabel, score, bulletsLabel, bullets, gameOver
+            scoreLabel, score, bulletsLabel, bullets, healthLabel, health, gameOver
         };
     }
 }

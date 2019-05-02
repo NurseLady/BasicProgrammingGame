@@ -7,7 +7,7 @@ namespace TheGame
         int Size { get;  }
         int Speed { get; }
         double SpeedFactor { get; }
-        int Life { get; }
+        int Health { get; }
         bool IsAlive { get; }
         
         void UpdateDirection();

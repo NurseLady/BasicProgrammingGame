@@ -7,7 +7,7 @@ namespace TheGame
         public int Size { get; private set; }
         public int Speed { get; private set; }
         public double SpeedFactor { get; }
-        public int Life { get; }
+        public int Health { get; }
         public bool IsAlive { get; private set; }
         public bool IsMet { get; set; }
         public int Costs { get; }
@@ -17,14 +17,14 @@ namespace TheGame
         public int BulletsCount { get; private set; }
         public int BulletsReloadingSpeed { get; private set; }
 
-        public SmartEnemy(Vector location, double direction, int size, int speed, int life, int costs, double speedFactor = 0.1)
+        public SmartEnemy(Vector location, double direction, int size, int speed, int health, int costs, double speedFactor = 0.1)
         {
             Location = location;
             Direction = direction;
             Size = size;
             Speed = speed;
             SpeedFactor = speedFactor;
-            Life = life;
+            Health = health;
             Costs = costs;
             IsAlive = true;
         }

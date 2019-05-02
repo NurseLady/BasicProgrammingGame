@@ -10,7 +10,7 @@ namespace TheGame
         
         public int Speed { get; private set; }
         public double SpeedFactor { get; }
-        public int Life { get; }
+        public int Health { get; }
         public bool IsAlive { get; private set; }
         public int Costs { get; private set; }
 
