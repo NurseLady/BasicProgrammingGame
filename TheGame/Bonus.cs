@@ -27,7 +27,16 @@ namespace TheGame
         public void UpdateDirection(){}
 
         public void Kill() => IsAlive = false;
-        
-        public void Use(Game game){}
+
+        public void Use(Game game)
+        {
+            game.Player.BulletsCount += Costs;
+            Kill();
+        }
+
+        public override string ToString()
+        {
+            return $"Bonus ({Location.X}, {Location.Y})";
+        }
     }
 }
