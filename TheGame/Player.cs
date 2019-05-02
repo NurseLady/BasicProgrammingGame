@@ -15,8 +15,9 @@ namespace TheGame
         
         public int FireSpeed { get; private set; }
         public int BulletsCount { get; private set; }
+        private double ActualSpeed = 0;
 
-        public Player(Vector location, double direction, int speed = 15)
+        public Player(Vector location, double direction, int speed = 30)
         {
             Location = location;
             Direction = direction;
@@ -28,11 +29,12 @@ namespace TheGame
         public void Move()
         {
             UpdateDirection();
-            if (IsMove)
-            {
-                var deltaLocation = new Vector(1, 0).Rotate(Direction) * Speed / 10;
-                Location = Location + deltaLocation;
-            }
+            if (IsMove && ActualSpeed < Speed)
+                ActualSpeed += 0.5;
+            else if (ActualSpeed > 0)
+                ActualSpeed -= 0.5;
+            var deltaLocation = new Vector(1, 0).Rotate(Direction) * ActualSpeed / 10;
+            Location = Location + deltaLocation;
         }
 
         public void UpdateDirection()
