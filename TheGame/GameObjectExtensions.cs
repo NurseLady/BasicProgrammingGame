@@ -20,6 +20,8 @@ namespace TheGame
             }
             var rect = GetObjectBody(gameObject);
             e.FillEllipse(new SolidBrush(gameObject.MainСolor), rect);
+            
+            if (gameObject is IBonus || gameObject is Bullet) return;
             v = new Vector(1, 0).Rotate(gameObject.Direction) * gameObject.Size * 5;
             v += gameObject.Location;
             var color = new Bullet(new Vector(0, 0),0, 0 ).MainСolor;
