@@ -76,7 +76,8 @@ namespace TheGame
                     Score += enemy.Costs;
                 gameObject.Kill();
             }
-            else if (gameObject is Bullet && FindIntersectedObject(gameObject) != null)
+            else if (gameObject is Bullet && FindIntersectedObject(gameObject) != null
+                                          && !(FindIntersectedObject(gameObject) is Bullet))
             {
                 FindIntersectedObject(gameObject).Health -= (int)(gameObject.Size * 10);
                 gameObject.Kill();

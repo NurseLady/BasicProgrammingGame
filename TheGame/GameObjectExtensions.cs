@@ -13,7 +13,7 @@ namespace TheGame
             if (gameObject is Bullet)
             {
                 v = gameObject.Location;
-                e.FillEllipse(Brushes.Chartreuse,  (float)v.X - gameObject.Size, (float)v.Y - gameObject.Size, 
+                e.FillEllipse(Brushes.Chartreuse,  (float)v.X - gameObject.Size*10, (float)v.Y - gameObject.Size*10, 
                     gameObject.Size * 20, gameObject.Size * 20);
                 return;
             }
