@@ -36,7 +36,7 @@ namespace TheGame
 
         private static void AddBonuses()
         {
-            GameObjects.Add(new Bonus(new Vector(30, 200), Math.PI/3, 70));
+            GameObjects.Add(new BulletBonus(new Vector(30, 200), 70));
         }
 
         private static void AddSmartEnemies()

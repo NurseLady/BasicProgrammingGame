@@ -70,7 +70,7 @@ namespace TheGame
 
         private void DoKill(IGameObject gameObject)
         {
-            if (!(gameObject.Health > 0 || gameObject is Bonus || gameObject is Bullet))
+            if (!(gameObject.Health > 0 || gameObject is IBonus || gameObject is Bullet))
             {
                 if (gameObject is IEnemy enemy)
                     Score += enemy.Costs;

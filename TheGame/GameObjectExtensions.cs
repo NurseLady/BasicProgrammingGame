@@ -17,7 +17,6 @@ namespace TheGame
                     gameObject.Size * 20, gameObject.Size * 20);
                 return;
             }
-            var r = GetObjectRadius(gameObject);
             var rect = GetObjectBody(gameObject);
             switch (gameObject)
             {
@@ -27,7 +26,7 @@ namespace TheGame
                 case SmartEnemy _:
                     e.FillEllipse(Brushes.Silver, rect);
                     break;
-                case Bonus _:
+                case BulletBonus _:
                     e.FillEllipse(Brushes.Plum, rect);
                     return;
                 case Player _:

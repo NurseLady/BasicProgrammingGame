@@ -2,22 +2,20 @@ using System;
 
 namespace TheGame
 {
-    public class Bonus : IGameObject
+    public class BulletBonus : IBonus
     {
         public Vector Location { get; set; }
-        public double Direction { get; private set; }
-        public float Size { get; private set; }
-        
-        public int Speed { get; private set; }
+        public double Direction { get; }
+        public float Size { get; }
+        public int Speed { get; }
         public double SpeedFactor { get; }
         public int Health { get; set; }
         public bool IsAlive { get; private set; }
-        public int Costs { get; private set; }
+        public int Costs { get; }
 
-        public Bonus(Vector location, double direction, int costs)
+        public BulletBonus(Vector location, int costs)
         {
             Location = location;
-            Direction = direction;
             Size = 1;
             Costs = costs;
             Speed = 0;
@@ -32,11 +30,6 @@ namespace TheGame
         {
             game.Player.BulletsCount += Costs;
             Kill();
-        }
-
-        public override string ToString()
-        {
-            return $"Bonus ({Location.X}, {Location.Y})";
         }
     }
 }
