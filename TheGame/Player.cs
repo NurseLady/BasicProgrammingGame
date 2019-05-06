@@ -31,7 +31,7 @@ namespace TheGame
 
         public void Move(Game game)
         {
-            Size = 2 + game.Score / 10;
+            Size = 2 + game.Score / 20;
             if (Health == 0)
             {
                 Kill();
