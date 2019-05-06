@@ -4,7 +4,7 @@ namespace TheGame
     {
         public Vector Location { get; set; }
         public double Direction { get; private set; }
-        public int Size { get; private set; }
+        public float Size { get; private set; }
         public int Speed { get; private set; }
         public double SpeedFactor { get; }
         public int Health { get; set; }
@@ -17,7 +17,7 @@ namespace TheGame
         public int BulletsCount { get; private set; }
         public int BulletsReloadingSpeed { get; private set; }
 
-        public SmartEnemy(Vector location, double direction, int size, int speed, int health, int costs, double speedFactor = 0.1)
+        public SmartEnemy(Vector location, double direction, float size, int speed, int health, int costs, double speedFactor = 0.1)
         {
             Location = location;
             Direction = direction;

@@ -4,7 +4,7 @@ namespace TheGame
     {
         Vector Location { get; set; } 
         double Direction { get; } 
-        int Size { get;  }
+        float Size { get;  }
         int Speed { get; }
         double SpeedFactor { get; }
         int Health { get; set; }

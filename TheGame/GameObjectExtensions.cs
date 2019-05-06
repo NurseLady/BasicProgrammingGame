@@ -14,7 +14,7 @@ namespace TheGame
             {
                 v = gameObject.Location;
                 e.FillEllipse(Brushes.Chartreuse,  (float)v.X - gameObject.Size, (float)v.Y - gameObject.Size, 
-                    gameObject.Size * 2, gameObject.Size * 2);
+                    gameObject.Size * 20, gameObject.Size * 20);
                 return;
             }
             var r = GetObjectRadius(gameObject);
@@ -47,17 +47,15 @@ namespace TheGame
              gameObject.Location.Y - r);
             return new Rectangle((int)leftTopCorner.X, (int)leftTopCorner.Y, r * 2, r * 2);
         }
-        
-        public static Rectangle GetObjectBody(this IGameObject gameObject, int r)
-        {
-            var leftTopCorner = new Vector(gameObject.Location.X - r, 
-                gameObject.Location.Y - r);
-            return new Rectangle((int)leftTopCorner.X, (int)leftTopCorner.Y, r * 2, r * 2);
-        }
 
         public static int GetObjectRadius(this IGameObject gameObject)
         {
-            return gameObject.Size * 5;
+            return (int) gameObject.Size * 5;
+        }
+        
+        public static double GetActualDistance(this IGameObject a, IGameObject b)
+        {
+            return a.Location.GetDistance(b.Location) - a.GetObjectRadius() - b.GetObjectRadius();
         }
     }
 }

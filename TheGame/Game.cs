@@ -48,16 +48,11 @@ namespace TheGame
         {
             var nearest = GameObjects
                 .Where(o => o != gameObject)
-                .OrderBy(o => GetActualDistance(o, gameObject))
+                .OrderBy(o => o.GetActualDistance(gameObject))
                 .FirstOrDefault();
             if (nearest != null)
-                return Math.Abs(GetActualDistance(nearest, gameObject)) < 1 ? nearest : null;
+                return nearest.GetActualDistance(gameObject) < 1 ? nearest : null;
             return null;
-        }
-
-        public double GetActualDistance(IGameObject a, IGameObject b)
-        {
-            return a.Location.GetDistance(b.Location) - a.GetObjectRadius() - b.GetObjectRadius();
         }
         
         private void MoveAllObjects()
@@ -69,29 +64,42 @@ namespace TheGame
         private void Move(IGameObject gameObject)
         {
             gameObject.UpdateDirection();
-            var deltaLocation = new Vector(1, 0).Rotate(gameObject.Direction) 
-                                * gameObject.Speed * gameObject.SpeedFactor;
-            var newLocation = gameObject.Location + deltaLocation;
+            CheckWallCollision(gameObject);
+            DoKill(gameObject);
+        }
+
+        private void DoKill(IGameObject gameObject)
+        {
             if (!(gameObject.Health > 0 || gameObject is Bonus || gameObject is Bullet))
             {
                 if (gameObject is IEnemy enemy)
                     Score += enemy.Costs;
                 gameObject.Kill();
             }
-            
-            if (newLocation.X > 0 && newLocation.Y > 0
-                                  && newLocation.X < Width && newLocation.Y < Height) 
+            else if (gameObject is Bullet && FindIntersectedObject(gameObject) != null)
             {
-                gameObject.Location = newLocation;
-                if (gameObject is Bullet && FindIntersectedObject(gameObject) != null)
-                {
-                     FindIntersectedObject(gameObject).Health -= gameObject.Size;   
-                     gameObject.Kill();
-                }
-
-            }
-            else if (gameObject is Bullet)
+                FindIntersectedObject(gameObject).Health -= (int)(gameObject.Size * 10);
                 gameObject.Kill();
+            }
+        }
+
+        private void CheckWallCollision(IGameObject gameObject)
+        {
+            var newLocation = GetNewLocation(gameObject);
+            if (!(newLocation.X > 0) || !(newLocation.Y > 0) || !(newLocation.X < Width) || !(newLocation.Y < Height))
+            {
+                if (gameObject is Bullet)
+                    gameObject.Kill();
+            }
+            else
+                gameObject.Location = newLocation;
+        }
+
+        private Vector GetNewLocation(IGameObject gameObject)
+        {
+            var deltaLocation = new Vector(1, 0).Rotate(gameObject.Direction) 
+                                * gameObject.Speed * gameObject.SpeedFactor;
+            return gameObject.Location + deltaLocation;
         }
     }
 }
