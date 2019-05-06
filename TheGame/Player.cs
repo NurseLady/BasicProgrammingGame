@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace TheGame
 {
     public class Player : IGameObject
@@ -13,6 +15,7 @@ namespace TheGame
         public bool IsMove { get; set; } = false;
         public Turn Turn { get; set; } = Turn.None;
         public bool IsAlive { get; private set; }
+        public Color MainСolor { get; } = ColorTranslator.FromHtml("#FF6037");
 
         public int FireSpeed { get; private set; } = 10;
         private int FirePause = 0;

@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace TheGame
 {
@@ -11,6 +12,7 @@ namespace TheGame
         public double SpeedFactor { get; }
         public int Health { get; set; }
         public bool IsAlive { get; private set; }
+        public Color MainСolor { get; } = ColorTranslator.FromHtml("#FBFFF4");
 
         public Bullet(Vector location, double direction, float size, int speed = 40, double speedFactor = 0.1)
         {

@@ -16,7 +16,7 @@ namespace TheGame
         {
             var game = new Game();
             DoubleBuffered = true;
-            BackColor = Color.Black;
+            BackColor = ColorTranslator.FromHtml("#2F2933");;
             var time = 0;
             var timer = new Timer
             {

@@ -57,6 +57,7 @@
       <DependentUpon>GameForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GameObjectExtensions.cs" />
+    <Compile Include="HealthBonus.cs" />
     <Compile Include="IBonus.cs" />
     <Compile Include="IEnemy.cs" />
     <Compile Include="IGameObject.cs" />

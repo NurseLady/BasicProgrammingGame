@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace TheGame
 {
     public interface IGameObject
@@ -9,6 +11,7 @@ namespace TheGame
         double SpeedFactor { get; }
         int Health { get; set; }
         bool IsAlive { get; }
+        Color MainСolor { get; }
         
         void UpdateDirection();
         void Kill();

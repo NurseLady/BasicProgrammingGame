@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace TheGame
 {
     public class SimpleEnemy : IEnemy
@@ -11,6 +13,7 @@ namespace TheGame
         public bool IsAlive { get; private set; }
         public bool IsMet { get; set; }
         public int Costs { get; private set; }
+        public Color MainСolor { get; } = ColorTranslator.FromHtml("#79BC8E");
 
         public SimpleEnemy(Vector location, double direction, float size, int speed, int health, int costs, double speedFactor = 0.1)
         {

@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace TheGame
 {
     public class SmartEnemy : IEnemy
@@ -11,6 +13,7 @@ namespace TheGame
         public bool IsAlive { get; private set; }
         public bool IsMet { get; set; }
         public int Costs { get; }
+        public Color MainСolor { get; } = ColorTranslator.FromHtml("#00A388");
         
         public int FireSpeed { get; private set; }
         public int MaxBulletsCount { get; private set; }

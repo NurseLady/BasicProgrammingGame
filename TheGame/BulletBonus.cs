@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 
 namespace TheGame
 {
@@ -12,6 +13,7 @@ namespace TheGame
         public int Health { get; set; }
         public bool IsAlive { get; private set; }
         public int Costs { get; }
+        public Color MainСolor { get; } = ColorTranslator.FromHtml("#B9FFFA");
 
         public BulletBonus(Vector location, int costs)
         {
