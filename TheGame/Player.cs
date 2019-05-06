@@ -65,7 +65,7 @@ namespace TheGame
             if (BulletsCount > 0)
             {
                 var playerR = this.GetObjectRadius();
-                var bulletLocation = new Vector(1,0).Rotate(Direction) * (playerR + 1);
+                var bulletLocation = new Vector(1,0).Rotate(Direction) * (playerR + Size / 2 + 2);
                 bulletLocation += Location;
                 var bullet = new Bullet(bulletLocation, Direction, Size, speedFactor:SpeedFactor);
                 game.GameObjects.Add(bullet);
