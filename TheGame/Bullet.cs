@@ -18,7 +18,7 @@ namespace TheGame
         {
             Location = location;
             Direction = direction;
-            Size = size / 10;
+            Size = size / 5;
             Speed = speed;
             SpeedFactor = speedFactor;
             IsAlive = true;
