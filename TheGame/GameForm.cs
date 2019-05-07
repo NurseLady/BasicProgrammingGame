@@ -108,11 +108,5 @@ namespace TheGame
             FormBorderStyle = FormBorderStyle.FixedDialog;
             InitializeComponent();
         }
-
-        public sealed override Color BackColor
-        {
-            get { return base.BackColor; }
-            set { base.BackColor = value; }
-        }
     }
 }
