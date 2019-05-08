@@ -52,6 +52,15 @@ namespace TheGame
             Location = new Point(healthLabel.Right, bulletsLabel.Bottom),
             ForeColor = Color.Silver
         };
+
+        public static Control skillLabel = new Label()
+        {
+            Text = "Skill: ",
+            Font = new Font("Arial", 10),
+            Size = new Size(65, 25),
+            Location = new Point(bullets.Right, bullets.Bottom),
+            ForeColor = Color.Silver
+        };
         public static Control gameOver = new Label
         {
             Font = new Font("Arial", 42),

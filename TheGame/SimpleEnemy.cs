@@ -11,7 +11,6 @@ namespace TheGame
         public double SpeedFactor { get; }
         public int Health { get; set; }
         public bool IsAlive { get; private set; }
-        public bool IsMet { get; set; }
         public int Costs { get; private set; }
         public Color MainСolor { get; } = ColorTranslator.FromHtml("#79BC8E");
 

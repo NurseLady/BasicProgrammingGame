@@ -20,7 +20,7 @@ namespace TheGame
         public int FireSpeed { get; private set; } = 10;
         private int FirePause = 0;
         public int BulletsCount { get; set; } = 5;
-        private double ActualSpeed = 0;
+        public double ActualSpeed { get; set; } = 0;
 
         public Player(Vector location, double direction, int speed = 15, double speedFactor = 0.1)
         {

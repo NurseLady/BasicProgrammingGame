@@ -14,9 +14,11 @@ namespace TheGame
     {
         public GameForm()
         {
+            ClientSize = new Size(1000, 640);
             var game = new Game();
             DoubleBuffered = true;
-            BackColor = ColorTranslator.FromHtml("#2F2933");;
+            BackColor = ColorTranslator.FromHtml("#2F2933");
+            
             var time = 0;
             var timer = new Timer
             {
@@ -65,12 +67,15 @@ namespace TheGame
                 {
                     Keys.Left, Keys.A
                 };
+                var useSkill = new Keys[3]
+                {
+                    Keys.ShiftKey, Keys.ControlKey, Keys.Q
+                };
                 
                 var turnRightKeys = new Keys[2]
                 {
                     Keys.Right, Keys.D
                 };
-                var fireKey = Keys.Space;
                 if (moveKeys.Contains(ev.KeyCode))
                     game.Player.IsMove = true;
                 
@@ -79,8 +84,12 @@ namespace TheGame
                 
                 if (turnRightKeys.Contains(ev.KeyCode))
                     game.Player.Turn = Turn.Right;
-                if (ev.KeyCode == fireKey)
+                
+                if (ev.KeyCode == Keys.Space)
                     game.Player.IsFire = true;
+                
+                if (useSkill.Contains(ev.KeyCode))
+                    game.Skill?.Use(game);
             };
             
             KeyUp += (sender, ev) =>

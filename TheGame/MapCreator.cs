@@ -38,6 +38,7 @@ namespace TheGame
         {
             GameObjects.Add(new BulletBonus(new Vector(30, 200), 70));
             GameObjects.Add(new HealthBonus(new Vector(600, 300), 70));
+            GameObjects.Add(new SpeedSkillBonus(new Vector(500, 140), 20));
         }
 
         private static void AddSmartEnemies()
@@ -47,7 +48,7 @@ namespace TheGame
 
         private static void AddSimpleEnemies()
         {
-           GameObjects.Add(new SimpleEnemy(new Vector(600, 400), 3, 3,5,3,3, speedFactor ));
+           GameObjects.Add(new SimpleEnemy(new Vector(600, 400), 3, 3,5,3,30, speedFactor ));
         }
     }
 }

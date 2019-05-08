@@ -10,6 +10,7 @@ namespace TheGame
         public int Score { get; set; }
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
+        public ISkill Skill = null;
 
         public readonly int Height;
         public readonly int Width;
@@ -35,6 +36,8 @@ namespace TheGame
             }
             HandlePlayerIntersection();
             UpdateListOfObjects();
+            if (Skill != null && Skill.IsActive)
+                Skill.Use(this);
         }
 
         private void UpdateListOfObjects()
@@ -76,11 +79,16 @@ namespace TheGame
                     Score += enemy.Costs;
                 gameObject.Kill();
             }
-            else if (gameObject is Bullet && FindIntersectedObject(gameObject) != null
-                                          && !(FindIntersectedObject(gameObject) is Bullet))
+            else
             {
-                FindIntersectedObject(gameObject).Health -= (int)(gameObject.Size * 10);
-                gameObject.Kill();
+                var intersectedObject = FindIntersectedObject(gameObject);
+                if (gameObject is Bullet && intersectedObject!= null
+                                         && !(intersectedObject is Bullet) 
+                                         && !(intersectedObject is IBonus))
+                {
+                    FindIntersectedObject(gameObject).Health -= (int)(gameObject.Size * 10);
+                    gameObject.Kill();
+                }       
             }
         }
 
