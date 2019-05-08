@@ -31,5 +31,10 @@ namespace TheGame
             else
                 Deactivate(game);
         }
+
+        public override string ToString()
+        {
+            return $"SpeedSkill {maxUsingTime}";
+        }
     }
 }

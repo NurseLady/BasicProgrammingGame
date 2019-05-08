@@ -58,9 +58,18 @@ namespace TheGame
             Text = "Skill: ",
             Font = new Font("Arial", 10),
             Size = new Size(65, 25),
-            Location = new Point(bullets.Right, bullets.Bottom),
+            Location = new Point(bullets.Right, 20),
             ForeColor = Color.Silver
         };
+        
+        public static Control skill = new Label
+        {
+            Font = new Font("Arial", 10),
+            AutoSize = true,
+            Location = new Point(skillLabel.Right, 20),
+            ForeColor = Color.Silver
+        };
+        
         public static Control gameOver = new Label
         {
             Font = new Font("Arial", 42),
@@ -70,7 +79,7 @@ namespace TheGame
         };
         public static List<Control> Controls = new List<Control>
         {
-            scoreLabel, score, bulletsLabel, bullets, healthLabel, health, gameOver
+            scoreLabel, score, bulletsLabel, bullets, healthLabel, health, skillLabel, skill, gameOver
         };
     }
 }

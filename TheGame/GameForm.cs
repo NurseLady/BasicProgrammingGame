@@ -37,6 +37,7 @@ namespace TheGame
                 ControlElements.score.Text = game.Score.ToString();
                 ControlElements.bullets.Text = game.Player.BulletsCount.ToString();
                 ControlElements.health.Text = game.Player.Health.ToString();
+                ControlElements.skill.Text = game.Skill?.ToString();
                 if (game.IsOver)
                 {
                     ControlElements.gameOver.Text = "GAME OVER";
