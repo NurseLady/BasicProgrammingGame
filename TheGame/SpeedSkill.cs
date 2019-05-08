@@ -24,7 +24,7 @@ namespace TheGame
         {
             if (actualUsingTime < maxUsingTime)
             {
-                game.Player.ActualSpeed = game.Player.Speed * 3;
+                game.Player.ActualSpeed = game.Player.Speed * 2;
                 actualUsingTime++;
                 IsActive = true;
             }
