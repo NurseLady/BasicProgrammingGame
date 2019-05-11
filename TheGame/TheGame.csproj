@@ -70,6 +70,7 @@
     <Compile Include="SmartEnemy.cs" />
     <Compile Include="SpeedSkill.cs" />
     <Compile Include="SpeedSkillBonus.cs" />
+    <Compile Include="ThunderSkill.cs" />
     <Compile Include="Turn.cs" />
     <Compile Include="Vector.cs" />
     <EmbeddedResource Include="GameForm.resx">

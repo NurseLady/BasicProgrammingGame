@@ -3,7 +3,7 @@ namespace TheGame
     public interface ISkill
     {
         bool IsActive { get; }
-        void Deactivate(Game game);
+        void GameMode();
         void Use(Game game);
     }
 }

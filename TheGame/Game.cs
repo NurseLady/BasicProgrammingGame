@@ -10,7 +10,8 @@ namespace TheGame
         public int Score { get; set; }
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
-        public ISkill Skill = null;
+        public ISkill Skill;
+        public Action GameMode;
 
         public readonly int Height;
         public readonly int Width;
@@ -23,21 +24,22 @@ namespace TheGame
             GameObjects = MapCreator.CreateRandomMap();
             Score = 0;
             IsOver = false;
+            GameMode = UsualGameMode;
         }
 
         public void Update()
         {
+            GameMode();
+            if (!Player.IsAlive)
+                IsOver = true;
+        }
+
+        public void UsualGameMode()
+        {
             MoveAllObjects();
             Player.Move(this);
-            if (!Player.IsAlive)
-            {
-                IsOver = true;
-                return;
-            }
             HandlePlayerIntersection();
             UpdateListOfObjects();
-            if (Skill != null && Skill.IsActive)
-                Skill.Use(this);
         }
 
         private void UpdateListOfObjects()

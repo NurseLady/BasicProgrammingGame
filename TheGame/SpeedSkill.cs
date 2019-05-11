@@ -6,30 +6,37 @@ namespace TheGame
     {
         public bool IsActive { get; private set; }
         private readonly int maxUsingTime;
-        private int actualUsingTime = 0;
+        private int actualUsingTime;
+        private Game game;
 
         public SpeedSkill(int maxUsingTime)
         {
             this.maxUsingTime = maxUsingTime;
         }
 
-
-
-        public void Deactivate(Game game)
+        public void GameMode()
         {
-            game.Skill = null;
-        }
-
-        public void Use(Game game)
-        {
-            if (actualUsingTime < maxUsingTime)
+            if (actualUsingTime <= maxUsingTime)
             {
                 game.Player.ActualSpeed = game.Player.Speed * 2;
                 actualUsingTime++;
                 IsActive = true;
             }
             else
-                Deactivate(game);
+                Deactivate();
+        }
+
+        private void Deactivate()
+        {
+            game.Skill = null;
+            game.GameMode -= GameMode;
+        }
+
+        public void Use(Game game)
+        {
+            this.game = game;
+            game.GameMode += GameMode;
+            IsActive = true;
         }
 
         public override string ToString()
