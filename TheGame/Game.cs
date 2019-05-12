@@ -34,22 +34,22 @@ namespace TheGame
                 IsOver = true;
         }
 
-        public void UsualGameMode()
+        internal void UsualGameMode()
         {
-            MoveAllObjects();
+            MoveAllObjects(Move);
             Player.Move(this);
             HandlePlayerIntersection();
             UpdateListOfObjects();
         }
 
-        private void UpdateListOfObjects()
+        internal void UpdateListOfObjects()
         {
             GameObjects = GameObjects.Where(o => o.IsAlive).ToList();
         }
 
-        private void HandlePlayerIntersection() => FindIntersectedObject(Player)?.Use(this);
-        
-        private IGameObject FindIntersectedObject(IGameObject gameObject)
+        internal void HandlePlayerIntersection() => FindIntersectedObject(Player)?.Use(this);
+
+        internal IGameObject FindIntersectedObject(IGameObject gameObject)
         {
             var nearest = GameObjects
                 .Where(o => o != gameObject)
@@ -59,21 +59,21 @@ namespace TheGame
                 return nearest.GetActualDistance(gameObject) < 1 ? nearest : null;
             return null;
         }
-        
-        private void MoveAllObjects()
+
+        internal void MoveAllObjects(Action<IGameObject> Move)
         {
             foreach (var gameObject in GameObjects)
                 Move(gameObject);
         }
 
-        private void Move(IGameObject gameObject)
+        internal void Move(IGameObject gameObject)
         {
             gameObject.UpdateDirection();
             CheckWallCollision(gameObject);
             DoKill(gameObject);
         }
 
-        private void DoKill(IGameObject gameObject)
+        internal void DoKill(IGameObject gameObject)
         {
             if (!(gameObject.Health > 0 || gameObject is IBonus || gameObject is Bullet))
             {
@@ -94,7 +94,7 @@ namespace TheGame
             }
         }
 
-        private void CheckWallCollision(IGameObject gameObject)
+        internal void CheckWallCollision(IGameObject gameObject)
         {
             var newLocation = GetNewLocation(gameObject);
             if (!(newLocation.X > 0) || !(newLocation.Y > 0) || !(newLocation.X < Width) || !(newLocation.Y < Height))

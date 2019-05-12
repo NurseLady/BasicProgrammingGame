@@ -72,7 +72,7 @@ namespace TheGame
         
         public double GetDistance(Vector a)
         {
-            return Math.Sqrt((a.X - this.X) * (a.X - this.X) + (a.Y - this.Y) * (a.Y - this.Y));
+            return Math.Sqrt((a.X - X) * (a.X - X) + (a.Y - Y) * (a.Y - Y));
         }
 
         public Vector Rotate(double angle)

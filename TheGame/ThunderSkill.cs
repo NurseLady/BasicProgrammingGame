@@ -8,6 +8,7 @@ namespace TheGame
     {
         public bool IsActive { get; private set; }
         private IEnemy lastTarget;
+        private IEnemy nextTarget;
         private readonly int maxTargetsCount;
         private int actualTargetsCount = 0;
         private int maxDamage;
@@ -21,11 +22,23 @@ namespace TheGame
         
         public void GameMode()
         {
-            var nextTarget = GetNextTargetByDijkstra(GetEnemiesList(game.GameObjects));
-            nextTarget.Health -= damage;
-            damage -= maxDamage / maxTargetsCount;
-            if (damage == 0 || actualTargetsCount > maxTargetsCount)
-                Deactivate();
+            game.MoveAllObjects(Move);
+            game.UpdateListOfObjects();
+            if (!lastTarget.IsAlive)
+            {
+                nextTarget = GetNextTargetByDijkstra(GetEnemiesList(game.GameObjects));
+                if (nextTarget == null || damage == 0 || actualTargetsCount == maxTargetsCount)
+                {
+                    Deactivate();
+                    return;
+                }
+                    var bullet = new Bullet(lastTarget.Location, GetBulletDirection(), damage, 50);
+                    game.GameObjects.Add(bullet);
+                    damage -= maxDamage / maxTargetsCount;
+                    actualTargetsCount++;
+                    lastTarget = nextTarget;
+            }
+            
         }
         private void Deactivate()
         {
@@ -41,6 +54,7 @@ namespace TheGame
             game.GameMode -= game.UsualGameMode;
             IsActive = true;
             lastTarget = new SmartEnemy(game.Player.Location, 0, 0, 0, 0, 0);
+            lastTarget.Kill();
             maxDamage = FindMaxHealth(game.GameObjects);
             damage = maxDamage;
         }
@@ -58,6 +72,20 @@ namespace TheGame
                 .OfType<IEnemy>()
                 .ToList();
         }
+
+        private double GetBulletDirection()
+        {
+            var v = nextTarget.Location - lastTarget.Location;
+            return v.Angle;
+        }
+
+        private void Move(IGameObject gameObject)
+        {
+            if (gameObject is Bullet)
+                game.CheckWallCollision(gameObject);
+            game.DoKill(gameObject);
+        }
+        
         class DijkstraData
         {
             public IEnemy Previous { get; set; }
@@ -66,7 +94,7 @@ namespace TheGame
         
         private IEnemy GetNextTargetByDijkstra(List<IEnemy> enemies)
         {
-            var track = new Dictionary<IEnemy, DijkstraData>();
+/*            var track = new Dictionary<IEnemy, DijkstraData>();
             var notVisited = enemies;
             track[lastTarget] = new DijkstraData{Cost = 0, Previous = null};
 
@@ -81,9 +109,14 @@ namespace TheGame
                         bestCost = track[enemy].Cost;
                         toOpen = enemy;
                     }
+            }*/
+            return enemies.FirstOrDefault();
 
-            }
-           
+        }
+        
+        public override string ToString()
+        {
+            return $"ThunderSkill {maxTargetsCount}";
         }
     }
 }

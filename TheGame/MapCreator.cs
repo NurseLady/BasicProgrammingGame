@@ -39,6 +39,7 @@ namespace TheGame
             GameObjects.Add(new BulletBonus(new Vector(30, 200), 70));
             GameObjects.Add(new HealthBonus(new Vector(600, 300), 70));
             GameObjects.Add(new SpeedSkillBonus(new Vector(500, 140), 20));
+            GameObjects.Add(new ThunderSkillBonus(new Vector(400, 250), 1));
         }
 
         private static void AddSmartEnemies()
