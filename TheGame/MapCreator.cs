@@ -16,7 +16,7 @@ namespace TheGame
         private static int maxLifeCount = 15;
         private static int maxSpeedCount = 10;
         private static int maxSizeCount = 10;
-        private static double speedFactor = 0.3 ;
+        private static double speedFactor = 0.3;
         private static List<IGameObject> GameObjects = new List<IGameObject>();
         
         
@@ -38,18 +38,19 @@ namespace TheGame
         {
             GameObjects.Add(new BulletBonus(new Vector(30, 200), 70));
             GameObjects.Add(new HealthBonus(new Vector(600, 300), 70));
-            GameObjects.Add(new SpeedSkillBonus(new Vector(500, 140), 20));
-            GameObjects.Add(new ThunderSkillBonus(new Vector(400, 250), 1));
+            GameObjects.Add(new SpeedSkillBonus(new Vector(500, 140), 1));
+            GameObjects.Add(new ThunderSkillBonus(new Vector(400, 250), 6));
         }
 
         private static void AddSmartEnemies()
         {
-            GameObjects.Add(new SmartEnemy(new Vector(200, 300), Math.PI/4, 2,2,3,30, speedFactor));
+            GameObjects.Add(new SmartEnemy(new Vector(200, 300), Math.PI/4, 2,2,7,30, speedFactor));
         }
 
         private static void AddSimpleEnemies()
         {
            GameObjects.Add(new SimpleEnemy(new Vector(600, 400), 3, 3,5,3,30, speedFactor ));
+           GameObjects.Add(new SimpleEnemy(new Vector(100, 500), 3, 3,-2,7,20, speedFactor ));
         }
     }
 }

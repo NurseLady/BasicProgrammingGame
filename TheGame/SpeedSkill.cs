@@ -1,4 +1,4 @@
-using System.Drawing;
+using System;
 
 namespace TheGame
 {
@@ -8,6 +8,7 @@ namespace TheGame
         private readonly int maxUsingTime;
         private int actualUsingTime;
         private Game game;
+        private Action gameMode;
 
         public SpeedSkill(int maxUsingTime)
         {
@@ -16,9 +17,9 @@ namespace TheGame
 
         public void GameMode()
         {
-            if (actualUsingTime <= maxUsingTime)
+            if (actualUsingTime < maxUsingTime)
             {
-                game.Player.ActualSpeed = game.Player.Speed * 2;
+                game.Player.ActualSpeed = game.Player.Speed * 3;
                 actualUsingTime++;
                 IsActive = true;
             }
@@ -29,12 +30,13 @@ namespace TheGame
         private void Deactivate()
         {
             game.Skill = null;
-            game.GameMode -= GameMode;
+            game.GameMode = gameMode;
         }
 
         public void Use(Game game)
         {
             this.game = game;
+            gameMode = game.GameMode;
             game.GameMode += GameMode;
             IsActive = true;
         }

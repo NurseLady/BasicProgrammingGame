@@ -27,6 +27,18 @@ namespace TheGame
             GameMode = UsualGameMode;
         }
 
+        public Game(List<IGameObject> map)
+        {
+            
+            Player = MapCreator.GetPlayer();
+            Width = MapCreator.GameWidth;
+            Height = MapCreator.GameHeight;
+            GameObjects = map;
+            Score = 0;
+            IsOver = false;
+            GameMode = UsualGameMode;
+        }
+
         public void Update()
         {
             GameMode();
@@ -88,7 +100,10 @@ namespace TheGame
                                          && !(intersectedObject is Bullet) 
                                          && !(intersectedObject is IBonus))
                 {
-                    FindIntersectedObject(gameObject).Health -= (int)(gameObject.Size * 10);
+                    var obj = FindIntersectedObject(gameObject);
+                    obj.Health -= (int)Math.Ceiling(gameObject.Size * 5);
+                    if (obj.Health <= 0)
+                        DoKill(obj);
                     gameObject.Kill();
                 }       
             }

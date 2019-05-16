@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -14,6 +15,10 @@ namespace TheGame
         private int maxDamage;
         private int damage;
         private Game game;
+        private Vector playerLocation;
+        private double playerDirection;
+        private Bullet bullet;
+        private Action gameMode;
         
         public ThunderSkill(int maxTargetsCount)
         {
@@ -24,34 +29,42 @@ namespace TheGame
         {
             game.MoveAllObjects(Move);
             game.UpdateListOfObjects();
-            if (!lastTarget.IsAlive)
+
+            if (bullet == null || (bullet != null && !bullet.IsAlive))
             {
-                nextTarget = GetNextTargetByDijkstra(GetEnemiesList(game.GameObjects));
-                if (nextTarget == null || damage == 0 || actualTargetsCount == maxTargetsCount)
+                
+                nextTarget = GetNextTarget(GetEnemiesList(game.GameObjects));
+                if (nextTarget == null || damage <= 0 || actualTargetsCount == maxTargetsCount)
                 {
                     Deactivate();
                     return;
                 }
-                    var bullet = new Bullet(lastTarget.Location, GetBulletDirection(), damage, 50);
-                    game.GameObjects.Add(bullet);
-                    damage -= maxDamage / maxTargetsCount;
-                    actualTargetsCount++;
-                    lastTarget = nextTarget;
+                bullet = new Bullet(lastTarget.Location, GetBulletDirection(), damage, 70);
+                game.GameObjects.Add(bullet);
+                damage -= (int) ((double) maxDamage / maxTargetsCount);
+                
+                actualTargetsCount++;
+                lastTarget = nextTarget;
             }
-            
+            game.Player.Move(game);
+            game.Player.Location = playerLocation;
+            game.Player.Direction = playerDirection;
         }
         private void Deactivate()
         {
             game.Skill = null;
-            game.GameMode -= GameMode;
-            game.GameMode += game.UsualGameMode;
+            game.GameMode = gameMode;
+
         }
 
         public void Use(Game game)
         {
             this.game = game;
-            game.GameMode += GameMode;
-            game.GameMode -= game.UsualGameMode;
+            playerLocation = game.Player.Location;
+            playerDirection = game.Player.Direction;
+            
+            gameMode = game.GameMode;
+            game.GameMode = GameMode;   
             IsActive = true;
             lastTarget = new SmartEnemy(game.Player.Location, 0, 0, 0, 0, 0);
             lastTarget.Kill();
@@ -61,9 +74,12 @@ namespace TheGame
 
         private int FindMaxHealth(List<IGameObject> gameObjects)
         {
-            return GetEnemiesList(gameObjects)
-                .OrderBy(o => o.Health)
-                .First().Health;
+            var health = GetEnemiesList(gameObjects)
+                .OrderByDescending(o => o.Health)
+                .FirstOrDefault()?.Health;
+            if (health != null)
+                return (int) health;
+            return 0;
         }
 
         private List<IEnemy> GetEnemiesList(List<IGameObject> gameObjects)
@@ -86,32 +102,18 @@ namespace TheGame
             game.DoKill(gameObject);
         }
         
-        class DijkstraData
-        {
-            public IEnemy Previous { get; set; }
-            public int Cost { get; set; }
+        private IEnemy GetNextTarget(List<IEnemy> enemies)
+        {        
+            return enemies.OrderByDescending(GetAttraction).FirstOrDefault();
         }
-        
-        private IEnemy GetNextTargetByDijkstra(List<IEnemy> enemies)
+
+        private double GetAttraction(IEnemy enemy)
         {
-/*            var track = new Dictionary<IEnemy, DijkstraData>();
-            var notVisited = enemies;
-            track[lastTarget] = new DijkstraData{Cost = 0, Previous = null};
-
-            while (true)
-            {
-                IEnemy toOpen = null;
-                var bestCost = int.MinValue;
-                
-                foreach (var enemy in notVisited)
-                    if (track.ContainsKey(enemy) && track[enemy].Cost > bestCost)
-                    {
-                        bestCost = track[enemy].Cost;
-                        toOpen = enemy;
-                    }
-            }*/
-            return enemies.FirstOrDefault();
-
+            var k1 = 1;
+            var k2 = 1;
+            var k3 = 0.5;
+            var fine = (enemy.Health - damage)*k3;
+            return enemy.Costs * k1 + k2 / lastTarget.GetActualDistance(enemy) - Math.Abs(fine);
         }
         
         public override string ToString()

@@ -14,7 +14,7 @@ namespace TheGame
         public readonly double X;
         public readonly double Y;
         public double Length => Math.Sqrt(X * X + Y * Y);
-        public double Angle => Math.Atan2(Y, X);
+        public double Angle => Math.Atan2(Y, X); 
         public static Vector Zero = new Vector(0, 0);
 
         public override string ToString() => $"X: {X}, Y: {Y}";

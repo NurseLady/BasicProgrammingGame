@@ -73,7 +73,12 @@
     <Compile Include="SmartEnemy.cs" />
     <Compile Include="SpeedSkill.cs" />
     <Compile Include="SpeedSkillBonus.cs" />
-    <Compile Include="Tests\Class1.cs" />
+    <Compile Include="Tests\BulletsBonusTests.cs" />
+    <Compile Include="Tests\HealthBonusTests.cs" />
+    <Compile Include="Tests\SpeedSkillBonusTests.cs" />
+    <Compile Include="Tests\SpeedSkillTests.cs" />
+    <Compile Include="Tests\ThunderSkillBonusTests.cs" />
+    <Compile Include="Tests\ThunderSkillTests.cs" />
     <Compile Include="ThunderSkillBonus.cs" />
     <Compile Include="ThunderSkill.cs" />
     <Compile Include="Turn.cs" />
