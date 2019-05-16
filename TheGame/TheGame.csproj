@@ -74,6 +74,7 @@
     <Compile Include="SpeedSkill.cs" />
     <Compile Include="SpeedSkillBonus.cs" />
     <Compile Include="Tests\BulletsBonusTests.cs" />
+    <Compile Include="Tests\GameObjectExtensionsTests.cs" />
     <Compile Include="Tests\HealthBonusTests.cs" />
     <Compile Include="Tests\SpeedSkillBonusTests.cs" />
     <Compile Include="Tests\SpeedSkillTests.cs" />
