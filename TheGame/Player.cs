@@ -11,13 +11,13 @@ namespace TheGame
         public int Speed { get; private set; }
         public double SpeedFactor { get; }
         public int Health { get; set; } = 10;
-        public bool IsFire { get; set; }
-        public bool IsMove { get; set; } = false;
-        public Turn Turn { get; set; } = Turn.None;
+        public bool IsFire { private get; set; }
+        public bool IsMove { private get; set; } = false;
+        public Turn Turn { private get; set; } = Turn.None;
         public bool IsAlive { get; private set; }
         public Color MainСolor { get; } = ColorTranslator.FromHtml("#FF6037");
 
-        public int FireSpeed { get; private set; } = 10;
+        public int FireSpeed { get; } = 10;
         private int FirePause = 0;
         public int BulletsCount { get; set; } = 5;
         public double ActualSpeed { get; set; } = 0;
@@ -63,18 +63,17 @@ namespace TheGame
             Direction += (int) Turn * TurnAngle;
         }
 
-        public void DoFire(Game game)
+        private void DoFire(Game game)
         {
-            if (BulletsCount > 0)
-            {
-                var playerR = this.GetObjectRadius();
-                var bulletLocation = new Vector(1,0).Rotate(Direction) * (playerR + Size / 2 + 2);
-                bulletLocation += Location;
-                var bullet = new Bullet(bulletLocation, Direction, Size, speedFactor:SpeedFactor);
-                game.GameObjects.Add(bullet);
-                FirePause = FireSpeed;
-                BulletsCount--;
-            }
+            if (BulletsCount <= 0) return;
+            
+            var playerR = this.GetObjectRadius();
+            var bulletLocation = new Vector(1,0).Rotate(Direction) * (playerR + Size / 2 + 2);
+            bulletLocation += Location;
+            var bullet = new Bullet(bulletLocation, Direction, Size, speedFactor:SpeedFactor);
+            game.GameObjects.Add(bullet);
+            FirePause = FireSpeed;
+            BulletsCount--;
         }
 
         public void Kill() => IsAlive = false;

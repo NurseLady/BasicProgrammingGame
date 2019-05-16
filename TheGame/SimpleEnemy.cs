@@ -6,8 +6,8 @@ namespace TheGame
     {
         public Vector Location { get; set; }
         public double Direction { get; private set; }
-        public float Size { get; private set; }
-        public int Speed { get; private set; }
+        public float Size { get; }
+        public int Speed { get; }
         public double SpeedFactor { get; }
         public int Health { get; set; }
         public bool IsAlive { get; private set; }

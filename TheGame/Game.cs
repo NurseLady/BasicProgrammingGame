@@ -6,12 +6,12 @@ namespace TheGame
 {
     public class Game
     {
-        public Player Player { get; private set; }
+        public Player Player { get; }
         public int Score { get; set; }
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
-        public ISkill Skill;
-        public Action GameMode;
+        internal ISkill Skill;
+        internal Action GameMode;
 
         public readonly int Height;
         public readonly int Width;
@@ -72,13 +72,13 @@ namespace TheGame
             return null;
         }
 
-        internal void MoveAllObjects(Action<IGameObject> Move)
+        internal void MoveAllObjects(Action<IGameObject> move)
         {
             foreach (var gameObject in GameObjects)
-                Move(gameObject);
+                move(gameObject);
         }
 
-        internal void Move(IGameObject gameObject)
+        private void Move(IGameObject gameObject)
         {
             gameObject.UpdateDirection();
             CheckWallCollision(gameObject);
@@ -96,16 +96,17 @@ namespace TheGame
             else
             {
                 var intersectedObject = FindIntersectedObject(gameObject);
-                if (gameObject is Bullet && intersectedObject!= null
-                                         && !(intersectedObject is Bullet) 
-                                         && !(intersectedObject is IBonus))
-                {
-                    var obj = FindIntersectedObject(gameObject);
-                    obj.Health -= (int)Math.Ceiling(gameObject.Size * 5);
-                    if (obj.Health <= 0)
-                        DoKill(obj);
-                    gameObject.Kill();
-                }       
+                
+                if (!(gameObject is Bullet) || intersectedObject == null || intersectedObject is Bullet ||
+                    intersectedObject is IBonus) return;
+                
+                var obj = FindIntersectedObject(gameObject);
+                obj.Health -= (int)Math.Ceiling(gameObject.Size * 5);
+                
+                if (obj.Health <= 0)
+                    DoKill(obj);
+                
+                gameObject.Kill();
             }
         }
 

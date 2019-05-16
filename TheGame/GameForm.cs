@@ -34,19 +34,19 @@ namespace TheGame
                 Controls.Add(control);
             Paint += (sender, args) =>
             {
-                ControlElements.score.Text = game.Score.ToString();
-                ControlElements.bullets.Text = game.Player.BulletsCount.ToString();
-                ControlElements.health.Text = game.Player.Health.ToString();
-                ControlElements.skill.Text = game.Skill?.ToString();
+                ControlElements.Score.Text = game.Score.ToString();
+                ControlElements.Bullets.Text = game.Player.BulletsCount.ToString();
+                ControlElements.Health.Text = game.Player.Health.ToString();
+                ControlElements.Skill.Text = game.Skill?.ToString();
                 if (game.IsOver)
                 {
-                    ControlElements.gameOver.Text = "GAME OVER";
-                    ControlElements.scoreLabel.Location = new Point(380,
-                        ControlElements.gameOver.Bottom + 20);
-                    ControlElements.scoreLabel.ForeColor = Color.Red;
-                    ControlElements.score.Location = new Point(ControlElements.scoreLabel.Right + 20,
-                        ControlElements.scoreLabel.Top);
-                    ControlElements.score.ForeColor = Color.Red;
+                    ControlElements.GameOver.Text = "GAME OVER";
+                    ControlElements.ScoreLabel.Location = new Point(380,
+                        ControlElements.GameOver.Bottom + 20);
+                    ControlElements.ScoreLabel.ForeColor = Color.Red;
+                    ControlElements.Score.Location = new Point(ControlElements.ScoreLabel.Right + 20,
+                        ControlElements.ScoreLabel.Top);
+                    ControlElements.Score.ForeColor = Color.Red;
                 }
                 else
                 {

@@ -6,7 +6,7 @@ namespace TheGame
 {
     public static class ControlElements
     {
-        public static Control scoreLabel = new Label
+        public static readonly Control ScoreLabel = new Label
         {
             Text = "Score: ",
             Font = new Font("Arial", 10),
@@ -14,14 +14,15 @@ namespace TheGame
             Location = new Point(20, 620),
             ForeColor = Color.Silver
         };
-        public static Control score = new Label
+        public static readonly Control Score = new Label
         {
             Font = new Font("Arial", 10),
             AutoSize = true,
-            Location = new Point(scoreLabel.Right, 620),
+            Location = new Point(ScoreLabel.Right, 620),
             ForeColor = Color.Silver
         };
-        public static Control bulletsLabel = new Label
+
+        private static readonly Control BulletsLabel = new Label
         {
             Text = "Bullets: ",
             Font = new Font("Arial", 10),
@@ -29,57 +30,57 @@ namespace TheGame
             Location = new Point(20, 20),
             ForeColor = Color.Blue
         };
-        public static Control bullets = new Label
+        public static readonly Control Bullets = new Label
         {
             Font = new Font("Arial", 10),
             AutoSize = true,
-            Location = new Point(bulletsLabel.Right, 20),
+            Location = new Point(BulletsLabel.Right, 20),
             ForeColor = Color.Silver
         };
 
-        public static Control healthLabel = new Label
+        private static readonly Control HealthLabel = new Label
         {
             Text = "Health: ",
             Font = new Font("Arial", 10),
             Size = new Size(65, 25),
-            Location = new Point(20, bulletsLabel.Bottom),
+            Location = new Point(20, BulletsLabel.Bottom),
             ForeColor = Color.Crimson
         };
-        public static Control health = new Label
+        public static readonly Control Health = new Label
         {
             Font = new Font("Arial", 10),
             AutoSize = true,
-            Location = new Point(healthLabel.Right, bulletsLabel.Bottom),
+            Location = new Point(HealthLabel.Right, BulletsLabel.Bottom),
             ForeColor = Color.Silver
         };
 
-        public static Control skillLabel = new Label()
+        private static readonly Control SkillLabel = new Label()
         {
             Text = "Skill: ",
             Font = new Font("Arial", 10),
             Size = new Size(65, 25),
-            Location = new Point(bullets.Right, 20),
+            Location = new Point(Bullets.Right, 20),
             ForeColor = Color.Silver
         };
-        
-        public static Control skill = new Label
+
+        internal static readonly Control Skill = new Label
         {
             Font = new Font("Arial", 10),
             AutoSize = true,
-            Location = new Point(skillLabel.Right, 20),
+            Location = new Point(SkillLabel.Right, 20),
             ForeColor = Color.Silver
         };
         
-        public static Control gameOver = new Label
+        public static readonly Control GameOver = new Label
         {
             Font = new Font("Arial", 42),
             AutoSize = true,
             Location = new Point(300, 350),
             ForeColor = Color.Silver
         };
-        public static List<Control> Controls = new List<Control>
+        public static readonly List<Control> Controls = new List<Control>
         {
-            scoreLabel, score, bulletsLabel, bullets, healthLabel, health, skillLabel, skill, gameOver
+            ScoreLabel, Score, BulletsLabel, Bullets, HealthLabel, Health, SkillLabel, Skill, GameOver
         };
     }
 }
