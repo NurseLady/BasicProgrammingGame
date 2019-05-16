@@ -88,7 +88,7 @@ namespace TheGame.Tests
         {
             var map = MapCreator.CreateRandomMap().Where(o => o is IEnemy).ToList();
             var game = new Game(map);
-            game.Skill = new ThunderSkill(4);
+            game.Skill = new ThunderSkill(6);
             
             game.Skill.Use(game);
             while (game.Skill != null)

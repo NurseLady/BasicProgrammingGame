@@ -41,7 +41,7 @@ namespace TheGame
                 }
                 bullet = new Bullet(lastTarget.Location, GetBulletDirection(), damage, 70);
                 game.GameObjects.Add(bullet);
-                damage -= (int) ((double) maxDamage / maxTargetsCount);
+                damage -= (int) ((double) maxDamage / maxTargetsCount + 0.002 * lastTarget.GetActualDistance(nextTarget));
                 
                 actualTargetsCount++;
                 lastTarget = nextTarget;
