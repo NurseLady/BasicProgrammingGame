@@ -14,6 +14,7 @@ namespace TheGame
     {
         public GameForm()
         {
+            var ScoreFlag = false;
             ClientSize = new Size(1000, 640);
             var game = new Game();
             DoubleBuffered = true;
@@ -34,12 +35,13 @@ namespace TheGame
                 Controls.Add(control);
             Paint += (sender, args) =>
             {
-                ControlElements.Score.Text = game.Score.ToString();
+                ControlElements.Score.Text = game.GlobalScore.ToString();
                 ControlElements.Bullets.Text = game.Player.BulletsCount.ToString();
                 ControlElements.Health.Text = game.Player.Health.ToString();
                 ControlElements.Skill.Text = game.Skill?.ToString();
                 if (game.IsOver)
                 {
+                    ScoreFlag = true;
                     ControlElements.GameOver.Text = "GAME OVER";
                     ControlElements.ScoreLabel.Location = new Point(380,
                         ControlElements.GameOver.Bottom + 20);

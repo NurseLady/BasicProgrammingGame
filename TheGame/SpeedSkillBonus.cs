@@ -5,7 +5,7 @@ namespace TheGame
     public class SpeedSkillBonus : IBonus
     {
         public Vector Location { get; set; }
-        public double Direction { get; }
+        public double Direction { get; private set; }
         public float Size { get; }
         public int Speed { get; }
         public double SpeedFactor { get; }
@@ -29,6 +29,11 @@ namespace TheGame
         {
             game.Skill = new SpeedSkill(Costs);
             Kill();
+        }
+        
+        public IGameObject Clone()
+        {
+            return new SpeedSkillBonus(Location, Costs);
         }
     }
 }

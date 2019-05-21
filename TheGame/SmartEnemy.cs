@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 namespace TheGame
@@ -5,7 +6,7 @@ namespace TheGame
     public class SmartEnemy : IEnemy
     {
         public Vector Location { get; set; }
-        public double Direction { get; }
+        public double Direction { get; private set; }
         public float Size { get; }
         public int Speed { get; }
         public double SpeedFactor { get; }
@@ -13,6 +14,7 @@ namespace TheGame
         public bool IsAlive { get; private set; }
         public int Costs { get; }
         public Color MainСolor { get; } = ColorTranslator.FromHtml("#00A388");
+        private Vector lastLocation;
         
         public int FireSpeed { get; private set; }
         public int MaxBulletsCount { get; private set; }
@@ -31,7 +33,15 @@ namespace TheGame
             IsAlive = true;
         }
 
-        public void UpdateDirection(){}
+        public void UpdateDirection()
+        {
+            if (!lastLocation.Equals(null) && lastLocation.Equals(Location))
+            {
+                Direction = (new Vector(1, 0).Rotate(Direction) * (-1)).Angle;
+            }
+
+            lastLocation = Location;
+        }
 
         public void Kill() => IsAlive = false;
 
@@ -44,6 +54,11 @@ namespace TheGame
                 game.Score += Costs;
                 Kill();
             }
+        }
+        
+        public IGameObject Clone()
+        {
+            return new SmartEnemy(Location, Direction, Size, Speed, Health, Costs, SpeedFactor);
         }
     }
 }

@@ -29,5 +29,10 @@ namespace TheGame
         public void Kill() => IsAlive = false;
         
         public void Use(Game game){}
+        
+        public IGameObject Clone()
+        {
+            return new Bullet(Location, Direction, Size, Speed, SpeedFactor);
+        }
     }
 }

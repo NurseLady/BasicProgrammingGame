@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace TheGame
 {
-    public class Vector
+    public struct Vector
     {
         public Vector(double x, double y)
         {
@@ -19,7 +19,7 @@ namespace TheGame
 
         public override string ToString() => $"X: {X}, Y: {Y}";
 
-        protected bool Equals(Vector other)
+        bool Equals(Vector other)
         {
             return X.Equals(other.X) && Y.Equals(other.Y);
         }

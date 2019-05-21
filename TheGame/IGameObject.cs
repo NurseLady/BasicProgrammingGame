@@ -16,5 +16,6 @@ namespace TheGame
         void UpdateDirection();
         void Kill();
         void Use(Game game);
+        IGameObject Clone();
     }
 }

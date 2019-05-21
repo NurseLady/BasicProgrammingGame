@@ -6,7 +6,7 @@ namespace TheGame
     public class BulletBonus : IBonus
     {
         public Vector Location { get; set; }
-        public double Direction { get; }
+        public double Direction { get; private set; }
         public float Size { get; }
         public int Speed { get; }
         public double SpeedFactor { get; }
@@ -32,6 +32,11 @@ namespace TheGame
         {
             game.Player.BulletsCount += Costs;
             Kill();
+        }
+        
+        public IGameObject Clone()
+        {
+            return new BulletBonus(Location, Costs);
         }
     }
 }

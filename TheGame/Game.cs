@@ -8,20 +8,25 @@ namespace TheGame
     {
         public Player Player { get; }
         public int Score { get; set; }
+        public int GlobalScore { get; private set; }
         public bool IsOver { get; private set; }
         public List<IGameObject> GameObjects { get; private set; }
-        internal ISkill Skill;
-        internal Action GameMode;
+        public List<IGameObject> NewObjects { get; set; } = new List<IGameObject>();
+        public ISkill Skill;
+        public Action GameMode;
+        private MapCreator Creator;
+        public int Lvl = 1;
 
         public readonly int Height;
         public readonly int Width;
         
         public Game()
         {
-            Player = MapCreator.GetPlayer();
+            Creator = new MapCreator(this);
+            Player = Creator.GetPlayer();
             Width = MapCreator.GameWidth;
             Height = MapCreator.GameHeight;
-            GameObjects = MapCreator.CreateRandomMap();
+            GameObjects = Creator.CreateRandomMap();
             Score = 0;
             IsOver = false;
             GameMode = UsualGameMode;
@@ -29,8 +34,8 @@ namespace TheGame
 
         public Game(List<IGameObject> map)
         {
-            
-            Player = MapCreator.GetPlayer();
+            Creator = new MapCreator(this);
+            Player = Creator.GetPlayer();
             Width = MapCreator.GameWidth;
             Height = MapCreator.GameHeight;
             GameObjects = map;
@@ -48,6 +53,15 @@ namespace TheGame
 
         internal void UsualGameMode()
         {
+            if (Score > 500 * Lvl)
+            {
+                Lvl++;
+                Score = 0;
+            }
+            GlobalScore = Score + 500 * (Lvl - 1);
+            Creator.UpdateMap();
+            GameObjects.AddRange(NewObjects);
+            NewObjects.Clear();
             MoveAllObjects(Move);
             Player.Move(this);
             HandlePlayerIntersection();
@@ -82,7 +96,7 @@ namespace TheGame
         {
             gameObject.UpdateDirection();
             CheckWallCollision(gameObject);
-            DoKill(gameObject);
+            DoKill(gameObject); 
         }
 
         internal void DoKill(IGameObject gameObject)

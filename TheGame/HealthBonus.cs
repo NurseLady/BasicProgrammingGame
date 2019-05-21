@@ -5,7 +5,7 @@ namespace TheGame
     public class HealthBonus : IBonus
     {
         public Vector Location { get; set; }
-        public double Direction { get; }
+        public double Direction { get; private set; }
         public float Size { get; }
         public int Speed { get; }
         public double SpeedFactor { get; }
@@ -31,6 +31,11 @@ namespace TheGame
         {
             game.Player.Health += Costs;
             Kill();
+        }
+
+        public IGameObject Clone()
+        {
+            return new HealthBonus(Location, Costs);
         }
     }
 }

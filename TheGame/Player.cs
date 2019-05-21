@@ -34,7 +34,7 @@ namespace TheGame
 
         public void Move(Game game)
         {
-            Size = 2 + game.Score / 20;
+            Size = 2 + game.Score / (200 * game.Lvl);
             if (Health == 0)
             {
                 Kill();
@@ -79,5 +79,10 @@ namespace TheGame
         public void Kill() => IsAlive = false;
         
         public void Use(Game game){}
+
+        public IGameObject Clone()
+        {
+            return new Player(Location, Direction, Speed, SpeedFactor);
+        }
     }
 }

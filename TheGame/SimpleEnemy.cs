@@ -43,5 +43,10 @@ namespace TheGame
                 Kill();
             }
         }
+
+        public IGameObject Clone()
+        {
+            return new SimpleEnemy(Location, Direction, Size, Speed, Health, Costs, SpeedFactor);
+        }
     }
 }

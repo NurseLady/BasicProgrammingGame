@@ -86,11 +86,11 @@ namespace TheGame.Tests
         [Test]
         public void KillAllEnemiesOnUsualMap()
         {
-            var map = MapCreator.CreateRandomMap().Where(o => o is IEnemy).ToList();
+            var map = new MapCreator(new Game()).CreateRandomMap().Where(o => o is IEnemy).ToList();
             var game = new Game(map);
             game.Skill = new ThunderSkill(6);
             
-            game.Skill.Use(game);
+            //game.Skill.Use(game);
             while (game.Skill != null)
             {
                 game.GameMode();
@@ -101,7 +101,7 @@ namespace TheGame.Tests
         [Test]
         public void KillOneEnemyOnUsualMap()
         {
-            var map = MapCreator.CreateRandomMap().Where(o => o is IEnemy).ToList();
+            var map = new MapCreator(new Game()).CreateRandomMap().Where(o => o is IEnemy).ToList();
             var game = new Game(map);
             game.Skill = new ThunderSkill(1);
             
@@ -116,7 +116,7 @@ namespace TheGame.Tests
         [Test]
         public void KillTwoEnemiesOnUsualMap()
         {
-            var map = MapCreator.CreateRandomMap().Where(o => o is IEnemy).ToList();
+            var map = new MapCreator(new Game()).CreateRandomMap().Where(o => o is IEnemy).ToList();
             var game = new Game(map);
             game.Skill = new ThunderSkill(3);
             
