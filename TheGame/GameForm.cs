@@ -14,7 +14,6 @@ namespace TheGame
     {
         public GameForm()
         {
-            var ScoreFlag = false;
             ClientSize = new Size(1000, 640);
             var game = new Game();
             DoubleBuffered = true;
@@ -39,19 +38,16 @@ namespace TheGame
                 ControlElements.Bullets.Text = game.Player.BulletsCount.ToString();
                 ControlElements.Health.Text = game.Player.Health.ToString();
                 ControlElements.Skill.Text = game.Skill?.ToString();
+                ControlElements.Lvl.Text = game.Lvl.ToString();
                 if (game.IsOver)
                 {
-                    ScoreFlag = true;
+                    ControlElements.GameOver.Left = 500 - ControlElements.GameOver.Width / 2;
+                    ControlElements.GameOver.Top = 320 - ControlElements.GameOver.Height / 2;
                     ControlElements.GameOver.Text = "GAME OVER";
-                    ControlElements.ScoreLabel.Location = new Point(380,
-                        ControlElements.GameOver.Bottom + 20);
-                    ControlElements.ScoreLabel.ForeColor = Color.Red;
-                    ControlElements.Score.Location = new Point(ControlElements.ScoreLabel.Right + 20,
-                        ControlElements.ScoreLabel.Top);
-                    ControlElements.Score.ForeColor = Color.Red;
                 }
                 else
                 {
+                    ControlElements.GameOver.Text = "";
                     game.Player.Draw(game, args.Graphics);
                     foreach (var gameObject in game.GameObjects)
                         gameObject.Draw(game, args.Graphics);
@@ -93,6 +89,11 @@ namespace TheGame
                 
                 if (useSkill.Contains(ev.KeyCode))
                     game.Skill?.Use(game);
+
+                if (ev.KeyCode == Keys.R)
+                {
+                    game = new Game();
+                }
             };
             
             KeyUp += (sender, ev) =>

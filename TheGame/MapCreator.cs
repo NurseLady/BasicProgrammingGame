@@ -75,6 +75,11 @@ namespace TheGame
 
         public void UpdateMap()
         {
+            if (game.Lvl > lvl)
+            {
+                lvl = game.Lvl;
+                CreateSpawners();
+            }
             if (game.NewObjects.Count == 0 && (game.GameObjects.Count == 0
                 || IsThereChance(1) && IsThereChance(1)))
                 game.NewObjects.AddRange(CreateRandomMap());
@@ -85,11 +90,6 @@ namespace TheGame
         
         private bool IsThereChance(int percents)
         {
-            if (game.Lvl > lvl)
-            {
-                lvl = game.Lvl;
-                CreateSpawners();
-            }
             var answer = new List<bool>();
             for (var i = 0; i < percents; i++)
                 answer.Add(true);

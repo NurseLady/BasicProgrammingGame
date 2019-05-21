@@ -71,16 +71,32 @@ namespace TheGame
             ForeColor = Color.Silver
         };
         
+        public static readonly Control LvlLabel = new Label
+        {
+            Text = "Level: ",
+            Font = new Font("Arial", 10),
+            Size = new Size(65, 25),
+            Location = new Point(Health.Right, SkillLabel.Bottom),
+            ForeColor = Color.Silver
+        };
+        public static readonly Control Lvl = new Label
+        {
+            Font = new Font("Arial", 10),
+            AutoSize = true,
+            Location = new Point(LvlLabel.Right, SkillLabel.Bottom),
+            ForeColor = Color.Silver
+        };
+        
         public static readonly Control GameOver = new Label
         {
             Font = new Font("Arial", 42),
             AutoSize = true,
-            Location = new Point(300, 350),
+            Location = new Point(250, 320),
             ForeColor = Color.Silver
         };
         public static readonly List<Control> Controls = new List<Control>
         {
-            ScoreLabel, Score, BulletsLabel, Bullets, HealthLabel, Health, SkillLabel, Skill, GameOver
+            ScoreLabel, Score, BulletsLabel, Bullets, HealthLabel, Health, SkillLabel, Skill, LvlLabel, Lvl, GameOver
         };
     }
 }
