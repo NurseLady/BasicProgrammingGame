@@ -60,14 +60,29 @@ namespace TheGame
             var s = spawners.ToList();
             Spawner spawner;
 
-            if (IsThereChance(45))
-                spawner = s[random.Next(2)].Value;
-            else if (IsThereChance(30))
-                spawner = s[2].Value;
-            else if (IsThereChance(70))
-                spawner = s[random.Next(3, 4)].Value;
+            if (game.GameObjects.OfType<IEnemy>().ToList().Count > 7
+                || (game.GameObjects.OfType<IBonus>().ToList().Count == 0 && game.GameObjects.Count != 0))
+            {
+                if (IsThereChance(5))
+                    spawner = s[random.Next(2)].Value;
+                else if (IsThereChance(30))
+                    spawner = s[2].Value;
+                else if (IsThereChance(50))
+                    spawner = s[random.Next(3, 4)].Value;
+                else
+                    spawner = s[random.Next(4, s.Count)].Value;
+            }
             else
-                spawner = s[random.Next(4, s.Count)].Value;
+            {
+                if (IsThereChance(45))
+                    spawner = s[random.Next(2)].Value;
+                else if (IsThereChance(30))
+                    spawner = s[2].Value;
+                else if (IsThereChance(70))
+                    spawner = s[random.Next(3, 4)].Value;
+                else
+                    spawner = s[random.Next(4, s.Count)].Value;
+            }
             spawner.SetLocation(new Vector(random.Next(10,GameWidth), random.Next(10,GameHeight)));
             spawner.SetDirection(random.NextDouble() * Math.PI);
             return spawner.Clone();
@@ -80,12 +95,12 @@ namespace TheGame
                 lvl = game.Lvl;
                 CreateSpawners();
             }
-            if (game.NewObjects.Count == 0 && (game.GameObjects.Count == 0
-                || IsThereChance(1) && IsThereChance(1)))
+            if (game.GameObjects.Where(o => o is IEnemy || o is Spawner).ToList().Count == 0 
+                && game.NewObjects.ToList().Count == 0
+                || (IsThereChance(1) && IsThereChance(1)))
                 game.NewObjects.AddRange(CreateRandomMap());
-            else if (IsThereChance(1))
-                if (IsThereChance(10))
-                    game.NewObjects.Add(CreateRandomObject());
+            else if (IsThereChance(1) && IsThereChance(10))
+                game.NewObjects.Add(CreateRandomObject());
         }
         
         private bool IsThereChance(int percents)

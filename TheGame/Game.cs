@@ -1,27 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 namespace TheGame
 {
+    // [JsonConverter(typeof(BaseConverter))]
     public class Game
     {
-        public Player Player { get; }
+        public Player Player { get; set; }
         public int Score { get; set; }
-        public int GlobalScore { get; private set; }
+        public int GlobalScore { get; set; }
         public bool IsOver { get; private set; }
-        public List<IGameObject> GameObjects { get; private set; }
+        public List<IGameObject> GameObjects { get; set; } = new List<IGameObject>();
         public List<IGameObject> NewObjects { get; set; } = new List<IGameObject>();
-        public ISkill Skill;
-        public Action GameMode;
-        private MapCreator Creator;
-        public int Lvl = 1;
+        public ISkill Skill { get; set; }
+        [JsonIgnore]
+        public Action GameMode { get; set; }
+        private MapCreator Creator { get; set; }
+        public int Lvl { get; set; } = 1;
 
         public readonly int Height;
         public readonly int Width;
         
         public Game()
         {
+            GameMode = UsualGameMode;
             Creator = new MapCreator(this);
             Player = Creator.GetPlayer();
             Width = MapCreator.GameWidth;
@@ -29,11 +33,11 @@ namespace TheGame
             GameObjects = Creator.CreateRandomMap();
             Score = 0;
             IsOver = false;
-            GameMode = UsualGameMode;
         }
 
         public Game(List<IGameObject> map)
         {
+            GameMode = UsualGameMode;
             Creator = new MapCreator(this);
             Player = Creator.GetPlayer();
             Width = MapCreator.GameWidth;
@@ -112,7 +116,7 @@ namespace TheGame
                 var intersectedObject = FindIntersectedObject(gameObject);
                 
                 if (!(gameObject is Bullet) || intersectedObject == null || intersectedObject is Bullet ||
-                    intersectedObject is IBonus) return;
+                    intersectedObject is IBonus || intersectedObject is Spawner) return;
                 
                 var obj = FindIntersectedObject(gameObject);
                 obj.Health -= (int)Math.Ceiling(gameObject.Size * 5);

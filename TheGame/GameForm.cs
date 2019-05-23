@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TheGame
 {
     public partial class GameForm : Form
@@ -91,9 +92,14 @@ namespace TheGame
                     game.Skill?.Use(game);
 
                 if (ev.KeyCode == Keys.R)
-                {
                     game = new Game();
-                }
+                
+                if (ev.KeyCode == Keys.S)
+                    Saver.SaveTheGame(game);
+
+                if (ev.KeyCode == Keys.L)
+                    game = Saver.LoadTheGame();
+
             };
             
             KeyUp += (sender, ev) =>
@@ -107,12 +113,14 @@ namespace TheGame
                 {
                     Keys.Left, Keys.A, Keys.Right, Keys.D
                 };
+                
                 var fireKey = Keys.Space;             
                 if (moveKeys.Contains(ev.KeyCode))
                     game.Player.IsMove = false;
                 
                 if (turnKeys.Contains(ev.KeyCode))
                     game.Player.Turn = Turn.None;
+                
                 if (ev.KeyCode == fireKey)
                     game.Player.IsFire = false;
             };

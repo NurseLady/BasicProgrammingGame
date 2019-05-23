@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace TheGame
 {
@@ -36,6 +37,58 @@ namespace TheGame
         public static double GetActualDistance(this IGameObject a, IGameObject b)
         {
             return a.Location.GetDistance(b.Location) - a.GetObjectRadius() - b.GetObjectRadius();
+        }
+
+        public static IGameObject FromString(this string s, bool GameObjectFlag)
+        {
+            if (s == null) return null;
+            IGameObject obj = null;
+            try
+            {
+                obj = JsonConvert.DeserializeObject<SimpleEnemy>(s);
+            }
+            catch
+            {}
+            try
+            {
+                obj = JsonConvert.DeserializeObject<SmartEnemy>(s);
+            }
+            catch
+            {}
+            try
+            {
+                obj = JsonConvert.DeserializeObject<BulletBonus>(s);
+            }
+            catch
+            {}
+            try
+            {
+                obj = JsonConvert.DeserializeObject<SpeedSkillBonus>(s);
+            }
+            catch
+            {}
+            try
+            {
+                obj = JsonConvert.DeserializeObject<ThunderSkillBonus>(s);
+            }
+            catch
+            {}
+
+            switch (obj)
+            {
+                case SimpleEnemy enemy:
+                    return enemy;
+                case SmartEnemy enemy:
+                    return enemy;
+                case SpeedSkillBonus bonus:
+                    return bonus;
+                case ThunderSkillBonus bonus:
+                    return bonus;
+                case BulletBonus bonus:
+                    return bonus;
+                default:
+                    return null;
+            }
         }
     }
 }

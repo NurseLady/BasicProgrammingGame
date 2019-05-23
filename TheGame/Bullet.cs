@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace TheGame
 {
@@ -33,6 +34,11 @@ namespace TheGame
         public IGameObject Clone()
         {
             return new Bullet(Location, Direction, Size, Speed, SpeedFactor);
+        }
+        
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

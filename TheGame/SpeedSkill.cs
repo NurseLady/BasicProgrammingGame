@@ -45,5 +45,10 @@ namespace TheGame
         {
             return $"SpeedSkill {maxUsingTime}";
         }
+        
+        public ISkill FromString(string str)
+        {
+            return new SpeedSkill(int.Parse(str.Split()[1]));
+        }
     }
 }

@@ -86,11 +86,11 @@ namespace TheGame.Tests
         [Test]
         public void KillAllEnemiesOnUsualMap()
         {
-            var map = new MapCreator(new Game()).CreateRandomMap().Where(o => o is IEnemy).ToList();
+            var map = CreateUsualMap();
             var game = new Game(map);
             game.Skill = new ThunderSkill(6);
             
-            //game.Skill.Use(game);
+            game.Skill.Use(game);
             while (game.Skill != null)
             {
                 game.GameMode();
@@ -101,7 +101,7 @@ namespace TheGame.Tests
         [Test]
         public void KillOneEnemyOnUsualMap()
         {
-            var map = new MapCreator(new Game()).CreateRandomMap().Where(o => o is IEnemy).ToList();
+            var map = CreateUsualMap();
             var game = new Game(map);
             game.Skill = new ThunderSkill(1);
             
@@ -116,7 +116,7 @@ namespace TheGame.Tests
         [Test]
         public void KillTwoEnemiesOnUsualMap()
         {
-            var map = new MapCreator(new Game()).CreateRandomMap().Where(o => o is IEnemy).ToList();
+            var map = CreateUsualMap();
             var game = new Game(map);
             game.Skill = new ThunderSkill(3);
             
@@ -125,7 +125,56 @@ namespace TheGame.Tests
             {
                 game.GameMode();
             }
-            Assert.True(game.Score == 60);
+            Assert.True(game.Score == 50);
+        }
+        
+        
+        [Test]
+        public void KillAllEnemiesOnGigantHealthMap()
+        {
+            var map = CreateGigantHealthMap();
+            var game = new Game(map);
+            game.Skill = new ThunderSkill(6);
+            
+            game.Skill.Use(game);
+            while (game.Skill != null)
+            {
+                game.GameMode();
+            }
+            Assert.True(game.GameObjects.Where(o => o is IEnemy).ToList().Count == 0);
+        }
+        
+        [Test]
+        public void KillTwoEnemiesOnGigantHealthMap()
+        {
+            var map = CreateGigantHealthMap();
+            var game = new Game(map);
+            game.Skill = new ThunderSkill(6);
+            
+            game.Skill.Use(game);
+            while (game.Skill != null)
+            {
+                game.GameMode();
+            }
+            Assert.True(game.GameObjects.Where(o => o is IEnemy).ToList().Count == 0);
+        }
+
+        private List<IGameObject> CreateUsualMap()
+        {
+            var map = new List<IGameObject>();
+            map.Add(new SmartEnemy(new Vector(200, 300), Math.PI/4, 2,2,7,30));
+            map.Add(new SimpleEnemy(new Vector(600, 400), 3, 3,5,3,30));
+            map.Add(new SimpleEnemy(new Vector(100, 500), 3, 3,-2,7,20 ));
+            return map;
+        }
+        
+        private List<IGameObject> CreateGigantHealthMap()
+        {
+            var map = new List<IGameObject>();
+            map.Add(new SmartEnemy(new Vector(200, 300), Math.PI/4, 2,2,70,30));
+            map.Add(new SimpleEnemy(new Vector(600, 400), 3, 3,5,30,30));
+            map.Add(new SimpleEnemy(new Vector(100, 500), 3, 3,-2,70,20 ));
+            return map;
         }
     }
 }

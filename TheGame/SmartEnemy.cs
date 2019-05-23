@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace TheGame
 {
@@ -15,11 +16,6 @@ namespace TheGame
         public int Costs { get; }
         public Color MainСolor { get; } = ColorTranslator.FromHtml("#00A388");
         private Vector lastLocation;
-        
-        public int FireSpeed { get; private set; }
-        public int MaxBulletsCount { get; private set; }
-        public int BulletsCount { get; private set; }
-        public int BulletsReloadingSpeed { get; private set; }
 
         public SmartEnemy(Vector location, double direction, float size, int speed, int health, int costs, double speedFactor = 0.1)
         {
@@ -59,6 +55,11 @@ namespace TheGame
         public IGameObject Clone()
         {
             return new SmartEnemy(Location, Direction, Size, Speed, Health, Costs, SpeedFactor);
+        }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

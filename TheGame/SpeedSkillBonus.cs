@@ -1,4 +1,5 @@
 using System.Drawing;
+using Newtonsoft.Json;
 
 namespace TheGame
 {
@@ -34,6 +35,11 @@ namespace TheGame
         public IGameObject Clone()
         {
             return new SpeedSkillBonus(Location, Costs);
+        }
+        
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(this);
         }
     }
 }

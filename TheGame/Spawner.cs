@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Reflection;
+using Newtonsoft.Json;
+using NUnit.Framework.Internal.Filters;
 
 namespace TheGame
 {
@@ -15,6 +17,7 @@ namespace TheGame
         public int Health { get; set; } = 10;
         public bool IsAlive { get; private set; } = true;
         public Color MainСolor { get; } = Color.Beige;
+        [JsonIgnore]
         private Game game;
         private IGameObject obj;
         private int time = 0;
@@ -56,7 +59,7 @@ namespace TheGame
         public void Kill()
         {
             IsAlive = false;
-
+            var obj = this.obj;
             var type = obj.GetType();
             type.InvokeMember("Direction", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.SetProperty | BindingFlags.Instance, null,
                 obj, new object[] {Direction});

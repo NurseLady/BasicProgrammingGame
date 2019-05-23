@@ -7,7 +7,7 @@ namespace TheGame
 {
     public class ThunderSkill : ISkill
     {
-        public bool IsActive { get; private set; }
+        public bool IsActive { get; private set; } 
         private IEnemy lastTarget;
         private IEnemy nextTarget;
         private readonly int maxTargetsCount;
@@ -41,7 +41,7 @@ namespace TheGame
                 }
                 bullet = new Bullet(lastTarget.Location, GetBulletDirection(), damage, 70);
                 game.GameObjects.Add(bullet);
-                damage -= (int) ((double) maxDamage / maxTargetsCount + 0.002 * lastTarget.GetActualDistance(nextTarget));
+                damage -= (int) ((double) maxDamage / maxTargetsCount + 0.001 * lastTarget.GetActualDistance(nextTarget));
                 
                 actualTargetsCount++;
                 lastTarget = nextTarget;
@@ -112,13 +112,19 @@ namespace TheGame
             var k1 = 1;
             var k2 = 1;
             var k3 = 0.5;
-            var fine = (enemy.Health - damage)*k3;
-            return enemy.Costs * k1 + k2 / lastTarget.GetActualDistance(enemy) - Math.Abs(fine);
+            var fine = Math.Abs(enemy.Health - damage)*k3;
+            if (enemy.Size <= game.Player.Size) fine += 5000;
+            return enemy.Costs * k1 + k2 / lastTarget.GetActualDistance(enemy) - fine;
         }
         
         public override string ToString()
         {
             return $"ThunderSkill {maxTargetsCount}";
+        }
+
+        public ISkill FromString(string str)
+        {
+            return new ThunderSkill(int.Parse(str.Split()[1]));
         }
     }
 }
